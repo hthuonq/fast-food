@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tỷ lệ lợi nhuận theo sản phẩm - Feane Restaurant</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #ffbe33;
+            --secondary-color: #222831;
+            --light-color: #ffffff;
+            --dark-color: #121618;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            transition: all 0.3s;
+            position: fixed;
+            z-index: 100;
+            width: 250px;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 0.25rem;
+            transition: all 0.2s;
+        }
+        
+        .sidebar .nav-link:hover, 
+        .sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+        }
+        
+        .sidebar .nav-link i {
+            width: 20px;
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .navbar-custom {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        
+        .card-custom {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+            transition: transform 0.3s;
+        }
+        
+        .card-custom:hover {
+            transform: translateY(-5px);
+        }
+        
+        .table-responsive {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .table th {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+        }
+        
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            transition: all 0.3s;
+        }
+        
+        .btn-custom:hover {
+            background-color: #e6a500;
+            transform: translateY(-2px);
+        }
+        
+        .toggle-sidebar {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                text-align: center;
+            }
+            
+            .sidebar .nav-link span {
+                display: none;
+            }
+            
+            .sidebar .nav-link i {
+                margin-right: 0;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .toggle-sidebar {
+                display: block;
+            }
+        }
+        
+        .profit-percentage {
+            font-weight: bold;
+            color: #28a745;
+        }
+        
+        .cost-price {
+            color: #6c757d;
+        }
+        
+        .selling-price {
+            font-weight: bold;
+            color: #dc3545;
+        }
+        
+        .category-header {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .category-header:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .category-header a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .category-header i {
+            margin-right: 10px;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border-color: var(--primary-color);
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            background-color: rgba(255, 190, 51, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Trang quản trị -->
+    <div id="admin-page">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="p-3">
+                <h4 class="text-center mb-4"><i class="fas fa-utensils"></i> Feane Admin</h4>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.html">
+                        <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="users.html">
+                        <i class="fas fa-users"></i> <span>Quản lý người dùng</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="categories.html">
+                        <i class="fas fa-tags"></i> <span>Loại sản phẩm</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">
+                        <i class="fas fa-hamburger"></i> <span>Sản phẩm</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="imports.html">
+                        <i class="fas fa-arrow-down"></i> <span>Nhập sản phẩm</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="pricing1.html">
+                        <i class="fas fa-dollar-sign"></i> <span>Quản lý giá bán</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="orders.html">
+                        <i class="fas fa-shopping-cart"></i> <span>Đơn hàng</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="inventory.html">
+                        <i class="fas fa-boxes"></i> <span>Tồn kho</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-4">
+                    <a class="nav-link" href="adminlogin.html" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom mb-4">
+                <div class="container-fluid">
+                    <button class="btn toggle-sidebar" id="toggle-sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="d-flex align-items-center">
+                        <span class="navbar-text me-3">
+                            Xin chào, <strong>Admin</strong>
+                        </span>
+                        <div class="dropdown">
+                            <button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-circle fa-lg"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i> Hồ sơ</a></li>
+                                <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i> Cài đặt</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="adminlogin.html" id="nav-logout-btn"><i class="fas fa-sign-out-alt me-2"></i> Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Pricing Management Content -->
+            <div id="pricing-page" class="page-content">
+                <h2 class="mb-4">Quản lý giá bán</h2>
+                
+                <!-- Tabs Navigation -->
+                <ul class="nav nav-tabs" id="pricingTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="pricing.html">
+                            <i class="fas fa-tags me-2"></i>Tỷ lệ lợi nhuận theo loại sản phẩm
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="pricingproducts.html">
+                            <i class="fas fa-hamburger me-2"></i>Tỷ lệ lợi nhuận theo sản phẩm
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Content -->
+                <div class="mt-4">
+                    <div class="card card-custom">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Tỷ lệ lợi nhuận theo sản phẩm</h5>
+                            <div class="d-flex">
+                                <select class="form-select me-2" id="categorySelect" style="width: auto;">
+                                    <option value="all">Tất cả loại sản phẩm</option>
+                                    <option value="pizza" selected>Pizza</option>
+                                    <option value="burger">Burger</option>
+                                    <option value="pasta">Pasta</option>
+                                    <option value="fries">Fries</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Pizza Category -->
+                            <div class="category-header">
+                                <a href="pizza-products.html">
+                                    <div>
+                                        <i class="fas fa-pizza-slice me-2"></i>Pizza
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="table-responsive mb-4">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Mã SP</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá vốn</th>
+                                            <th>Tỷ lệ lợi nhuận (%)</th>
+                                            <th>Giá bán</th>
+                                            <th>Ngày cập nhật</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>PZ001</td>
+                                            <td>Delicious Pizza (Premium)</td>
+                                            <td class="cost-price">$15.38</td>
+                                            <td class="profit-percentage">30%</td>
+                                            <td class="selling-price">$20.00</td>
+                                            <td>15/05/2023</td>
+                                            <td>
+                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
+                                                    <i class="fas fa-edit"></i> Sửa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>PZ002</td>
+                                            <td>Delicious Pizza (Standard)</td>
+                                            <td class="cost-price">$13.08</td>
+                                            <td class="profit-percentage">30%</td>
+                                            <td class="selling-price">$17.00</td>
+                                            <td>14/05/2023</td>
+                                            <td>
+                                                 <a href="pricingedit.html" class="btn btn-sm btn-custom">
+                                                    <i class="fas fa-edit"></i> Sửa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>PZ003</td>
+                                            <td>Delicious Pizza (Basic)</td>
+                                            <td class="cost-price">$11.54</td>
+                                            <td class="profit-percentage">30%</td>
+                                            <td class="selling-price">$15.00</td>
+                                            <td>12/05/2023</td>
+                                            <td>
+ <a href="pricingedit.html" class="btn btn-sm btn-custom">
+                                                    <i class="fas fa-edit"></i> Sửa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - categorySelect functionality initialized');
+            
+            // Xử lý toggle sidebar trên mobile
+            document.getElementById('toggle-sidebar').addEventListener('click', function() {
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.main-content');
+                
+                if (sidebar.style.width === '70px' || sidebar.style.width === '') {
+                    sidebar.style.width = '250px';
+                    mainContent.style.marginLeft = '250px';
+                    
+                    const navTexts = document.querySelectorAll('.sidebar .nav-link span');
+                    navTexts.forEach(text => text.style.display = 'inline');
+                } else {
+                    sidebar.style.width = '70px';
+                    mainContent.style.marginLeft = '70px';
+                    
+                    const navTexts = document.querySelectorAll('.sidebar .nav-link span');
+                    navTexts.forEach(text => text.style.display = 'none');
+                }
+            });
+
+            // Xử lý chuyển trang khi chọn loại sản phẩm
+            const categorySelect = document.getElementById('categorySelect');
+            
+            if (categorySelect) {
+                console.log('categorySelect element found');
+                
+                categorySelect.addEventListener('change', function() {
+                    const selectedCategory = this.value;
+                    console.log('Selected category:', selectedCategory);
+                    
+                    // Định nghĩa các trang tương ứng với từng loại sản phẩm
+                    const categoryPages = {
+                        'all': 'pricingproducts.html',
+                        'pizza': 'pricingproductspizza.html',
+                        'burger': 'pricingproductsburger.html',
+                        'pasta': 'pricingproductspasta.html',
+                        'fries': 'pricingproductsfries.html'
+                    };
+                    
+                    // Chuyển hướng đến trang tương ứng
+                    if (categoryPages[selectedCategory]) {
+                        console.log('Redirecting to:', categoryPages[selectedCategory]);
+                        window.location.href = categoryPages[selectedCategory];
+                    } else {
+                        console.log('No page defined for category:', selectedCategory);
+                    }
+                });
+            } else {
+                console.error('categorySelect element not found!');
+            }
+        });
+    </script>
+</body>
+</html>
