@@ -183,6 +183,127 @@
         .nav-tabs .nav-link:hover {
             background-color: rgba(255, 190, 51, 0.1);
         }
+        
+        /* New styles for search functionality */
+        .global-search-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-input-container {
+            flex-grow: 1;
+            position: relative;
+        }
+        
+        .search-input {
+            padding-right: 45px;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        
+        .search-btn {
+            white-space: nowrap;
+        }
+        
+        /* Styles for editable fields */
+        .editable-input {
+            width: 80px;
+            padding: 4px 8px;
+            border: 1px solid #ffbe33;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .save-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        
+        .save-btn:hover {
+            background-color: #218838;
+        }
+        
+        .cancel-btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #5a6268;
+        }
+        
+        .edit-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        
+        .edit-actions {
+            display: flex;
+            justify-content: flex-start;
+        }
+        
+        .profit-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        .category-container {
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .category-content.show {
+            max-height: 5000px; /* Giá trị đủ lớn để chứa nội dung */
+        }
+        
+        .category-header .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .category-header.expanded .toggle-icon {
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 <body>
@@ -221,7 +342,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="pricing1.html">
-                        <i class="fas fa-dollar-sign"></i> <span>Quản lý giá bán</span>
+                        <i class="fas fa-dollar-sign"></i> <span> Giá bán</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -271,7 +392,21 @@
 
             <!-- Pricing Management Content -->
             <div id="pricing-page" class="page-content">
-                <h2 class="mb-4">Quản lý giá bán</h2>
+                <h2 class="mb-4">Giá bán</h2>
+                
+                <!-- Global Search Container -->
+                <div class="global-search-container">
+                    <h5 class="mb-3"><i class="fas fa-search me-2"></i>Tra cứu</h5>
+                    <form class="search-form" id="global-search-form">
+                        <div class="search-input-container">
+                            <input type="text" class="form-control search-input" id="global-search-input" placeholder="Nhập tên hoặc mã sản phẩm...">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                        <button type="submit" class="btn btn-custom search-btn">
+                            <i class="fas fa-check me-2"></i>OK
+                        </button>
+                    </form>
+                </div>
                 
                 <!-- Tabs Navigation -->
                 <ul class="nav nav-tabs" id="pricingTabs" role="tablist">
@@ -285,7 +420,6 @@
                             <i class="fas fa-hamburger me-2"></i>Tỷ lệ lợi nhuận theo sản phẩm
                         </a>
                     </li>
-                   
                 </ul>
                 
                 <!-- Content -->
@@ -293,257 +427,284 @@
                     <div class="card card-custom">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="card-title mb-0">Tỷ lệ lợi nhuận theo sản phẩm</h5>
-                           <div class="d-flex">
-    <select class="form-select me-2" id="categorySelect" style="width: auto;" onchange="redirectOnAllCategory(this)">
-        <option value="all" selected>Tất cả loại sản phẩm</option>
-        <option value="pizza">Pizza</option>
-        <option value="burger">Burger</option>
-        <option value="pasta">Pasta</option>
-        <option value="fries">Fries</option>
-    </select>
-</div>
-
-<script>
-function redirectOnAllCategory(selectElement) {
-    if (selectElement.value === 'all') {
-        // Thay đổi URL thành trang web bạn muốn chuyển đến
-        window.location.href = 'pricing.html';
-    }
-}
-</script>
+                            <div class="d-flex">
+                                <select class="form-select me-2" id="categorySelect" style="width: auto;">
+                                    <option value="all" selected>Tất cả loại sản phẩm</option>
+                                    <option value="pizza">Pizza</option>
+                                    <option value="burger">Burger</option>
+                                    <option value="pasta">Pasta</option>
+                                    <option value="fries">Khoai tây chiên</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="card-body">
                             <!-- Pizza Category -->
-                            <div class="category-header">
-                                <a href="pricingproductspizza.html">
+                            <div class="category-container" data-category="pizza">
+                                <div class="category-header" id="pizza-header">
                                     <div>
                                         <i class="fas fa-pizza-slice me-2"></i>Pizza
+                                        <i class="fas fa-chevron-right toggle-icon ms-2"></i>
                                     </div>
-                                    <div>
-                                        <i class="fas fa-chevron-right"></i>
+                                </div>
+                                <div class="category-content" id="pizza-content">
+                                    <div class="table-responsive mb-4">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã SP</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Giá vốn</th>
+                                                    <th>Tỷ lệ lợi nhuận (%)</th>
+                                                    <th>Giá bán</th>
+                                                    <th>Ngày cập nhật</th>
+                                                    <th>Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>PZ001</td>
+                                                    <td>Delicious Pizza (Premium)</td>
+                                                    <td class="cost-price">$15.38</td>
+                                                    <td>
+                                                        <div class="profit-cell" id="profit-cell-PZ001">
+                                                            <span class="profit-percentage">30%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="selling-price">$20.00</td>
+                                                    <td>15/05/2023</td>
+                                                    <td class="action-buttons">
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('PZ001', '30')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>PZ002</td>
+                                                    <td>Delicious Pizza (Standard)</td>
+                                                    <td class="cost-price">$13.08</td>
+                                                    <td>
+                                                        <div class="profit-cell" id="profit-cell-PZ002">
+                                                            <span class="profit-percentage">30%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="selling-price">$17.00</td>
+                                                    <td>14/05/2023</td>
+                                                    <td class="action-buttons">
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('PZ002', '30')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>PZ003</td>
+                                                    <td>Delicious Pizza (Basic)</td>
+                                                    <td class="cost-price">$11.54</td>
+                                                    <td>
+                                                        <div class="profit-cell" id="profit-cell-PZ003">
+                                                            <span class="profit-percentage">30%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="selling-price">$15.00</td>
+                                                    <td>12/05/2023</td>
+                                                    <td class="action-buttons">
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('PZ003', '30')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="table-responsive mb-4">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã SP</th>
-                                            <th>Tên sản phẩm</th>
-                                            <th>Giá vốn</th>
-                                            <th>Tỷ lệ lợi nhuận (%)</th>
-                                            <th>Giá bán</th>
-                                            <th>Ngày cập nhật</th>
-                                            <th>Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>PZ001</td>
-                                            <td>Delicious Pizza (Premium)</td>
-                                            <td class="cost-price">$15.38</td>
-                                            <td class="profit-percentage">30%</td>
-                                            <td class="selling-price">$20.00</td>
-                                            <td>15/05/2023</td>
-                                            <td>
-                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
-                                                    <i class="fas fa-edit"></i> Sửa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>PZ002</td>
-                                            <td>Delicious Pizza (Standard)</td>
-                                            <td class="cost-price">$13.08</td>
-                                            <td class="profit-percentage">30%</td>
-                                            <td class="selling-price">$17.00</td>
-                                            <td>14/05/2023</td>
-                                            <td>
-                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
-                                                    <i class="fas fa-edit"></i> Sửa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>PZ003</td>
-                                            <td>Delicious Pizza (Basic)</td>
-                                            <td class="cost-price">$11.54</td>
-                                            <td class="profit-percentage">30%</td>
-                                            <td class="selling-price">$15.00</td>
-                                            <td>12/05/2023</td>
-                                            <td>
-                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
-                                                    <i class="fas fa-edit"></i> Sửa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                </div>
                             </div>
                             
                             <!-- Burger Category -->
-                            <div class="category-header">
-                                <a href="burger-products.html">
+                            <div class="category-container" data-category="burger">
+                                <div class="category-header" id="burger-header">
                                     <div>
                                         <i class="fas fa-hamburger me-2"></i>Burger
+                                        <i class="fas fa-chevron-right toggle-icon ms-2"></i>
                                     </div>
-                                    <div>
-                                        <i class="fas fa-chevron-right"></i>
+                                </div>
+                                <div class="category-content" id="burger-content">
+                                    <div class="table-responsive mb-4">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã SP</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Giá vốn</th>
+                                                    <th>Tỷ lệ lợi nhuận (%)</th>
+                                                    <th>Giá bán</th>
+                                                    <th>Ngày cập nhật</th>
+                                                    <th>Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>BG001</td>
+                                                    <td>Delicious Burger</td>
+                                                    <td class="cost-price">$11.11</td>
+                                                    <td>
+                                                        <div class="profit-cell" id="profit-cell-BG001">
+                                                            <span class="profit-percentage">35%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="selling-price">$15.00</td>
+                                                    <td>15/05/2023</td>
+                                                    <td class="action-buttons">
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('BG001', '35')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>BG002</td>
+                                                    <td>Tasty Burger (Premium)</td>
+                                                    <td class="cost-price">$8.89</td>
+                                                    <td>
+                                                        <div class="profit-cell" id="profit-cell-BG002">
+                                                            <span class="profit-percentage">35%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="selling-price">$12.00</td>
+                                                    <td>14/05/2023</td>
+                                                    <td class="action-buttons">
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('BG002', '35')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>BG003</td>
+                                                    <td>Tasty Burger (Standard)</td>
+                                                    <td class="cost-price">$10.37</td>
+                                                    <td>
+                                                        <div class="profit-cell" id="profit-cell-BG003">
+                                                            <span class="profit-percentage">35%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="selling-price">$14.00</td>
+                                                    <td>13/05/2023</td>
+                                                    <td class="action-buttons">
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('BG003', '35')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="table-responsive mb-4">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã SP</th>
-                                            <th>Tên sản phẩm</th>
-                                            <th>Giá vốn</th>
-                                            <th>Tỷ lệ lợi nhuận (%)</th>
-                                            <th>Giá bán</th>
-                                            <th>Ngày cập nhật</th>
-                                            <th>Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>BG001</td>
-                                            <td>Delicious Burger</td>
-                                            <td class="cost-price">$11.11</td>
-                                            <td class="profit-percentage">35%</td>
-                                            <td class="selling-price">$15.00</td>
-                                            <td>15/05/2023</td>
-                                            <td>
-                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
-                                                    <i class="fas fa-edit"></i> Sửa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>BG002</td>
-                                            <td>Tasty Burger (Premium)</td>
-                                            <td class="cost-price">$8.89</td>
-                                            <td class="profit-percentage">35%</td>
-                                            <td class="selling-price">$12.00</td>
-                                            <td>14/05/2023</td>
-                                            <td>
-                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
-                                                    <i class="fas fa-edit"></i> Sửa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>BG003</td>
-                                            <td>Tasty Burger (Standard)</td>
-                                            <td class="cost-price">$10.37</td>
-                                            <td class="profit-percentage">35%</td>
-                                            <td class="selling-price">$14.00</td>
-                                            <td>13/05/2023</td>
-                                            <td>
-                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
-                                                    <i class="fas fa-edit"></i> Sửa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                </div>
                             </div>
                             
                             <!-- Pasta Category -->
-                            <div class="category-header">
-                                <a href="pasta-products.html">
+                            <div class="category-container" data-category="pasta">
+                                <div class="category-header" id="pasta-header">
                                     <div>
                                         <i class="fas fa-utensils me-2"></i>Pasta
+                                        <i class="fas fa-chevron-right toggle-icon ms-2"></i>
                                     </div>
-                                    <div>
-                                        <i class="fas fa-chevron-right"></i>
+                                </div>
+                                <div class="category-content" id="pasta-content">
+                                    <div class="table-responsive mb-4">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã SP</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Giá vốn</th>
+                                                    <th>Tỷ lệ lợi nhuận (%)</th>
+                                                    <th>Giá bán</th>
+                                                    <th>Ngày cập nhật</th>
+                                                    <th>Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>PA001</td>
+                                                    <td>Delicious Pasta (Premium)</td>
+                                                    <td class="cost-price">$12.86</td>
+                                                    <td>
+                                                        <div class="profit-cell" id="profit-cell-PA001">
+                                                            <span class="profit-percentage">40%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="selling-price">$18.00</td>
+                                                    <td>15/05/2023</td>
+                                                    <td class="action-buttons">
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('PA001', '40')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>PA002</td>
+                                                    <td>Delicious Pasta (Standard)</td>
+                                                    <td class="cost-price">$7.14</td>
+                                                    <td>
+                                                        <div class="profit-cell" id="profit-cell-PA002">
+                                                            <span class="profit-percentage">40%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="selling-price">$10.00</td>
+                                                    <td>14/05/2023</td>
+                                                    <td class="action-buttons">
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('PA002', '40')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="table-responsive mb-4">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã SP</th>
-                                            <th>Tên sản phẩm</th>
-                                            <th>Giá vốn</th>
-                                            <th>Tỷ lệ lợi nhuận (%)</th>
-                                            <th>Giá bán</th>
-                                            <th>Ngày cập nhật</th>
-                                            <th>Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>PA001</td>
-                                            <td>Delicious Pasta (Premium)</td>
-                                            <td class="cost-price">$12.86</td>
-                                            <td class="profit-percentage">40%</td>
-                                            <td class="selling-price">$18.00</td>
-                                            <td>15/05/2023</td>
-                                            <td>
-                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
-                                                    <i class="fas fa-edit"></i> Sửa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>PA002</td>
-                                            <td>Delicious Pasta (Standard)</td>
-                                            <td class="cost-price">$7.14</td>
-                                            <td class="profit-percentage">40%</td>
-                                            <td class="selling-price">$10.00</td>
-                                            <td>14/05/2023</td>
-                                            <td>
-                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
-                                                    <i class="fas fa-edit"></i> Sửa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                </div>
                             </div>
                             
                             <!-- Fries Category -->
-                            <div class="category-header">
-                                <a href="fries-products.html">
+                            <div class="category-container" data-category="fries">
+                                <div class="category-header" id="fries-header">
                                     <div>
-                                        <i class="fas fa-french-fries me-2"></i>Fries
+                                        <i class="fas fa-french-fries me-2"></i>Khoai tây chiên
+                                        <i class="fas fa-chevron-right toggle-icon ms-2"></i>
                                     </div>
-                                    <div>
-                                        <i class="fas fa-chevron-right"></i>
+                                </div>
+                                <div class="category-content" id="fries-content">
+                                    <div class="table-responsive mb-4">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã SP</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Giá vốn</th>
+                                                    <th>Tỷ lệ lợi nhuận (%)</th>
+                                                    <th>Giá bán</th>
+                                                    <th>Ngày cập nhật</th>
+                                                    <th>Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>FR001</td>
+                                                    <td>French Fries</td>
+                                                    <td class="cost-price">$6.67</td>
+                                                    <td>
+                                                        <div class="profit-cell" id="profit-cell-FR001">
+                                                            <span class="profit-percentage">50%</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="selling-price">$10.00</td>
+                                                    <td>15/05/2023</td>
+                                                    <td class="action-buttons">
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('FR001', '50')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="table-responsive mb-4">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã SP</th>
-                                            <th>Tên sản phẩm</th>
-                                            <th>Giá vốn</th>
-                                            <th>Tỷ lệ lợi nhuận (%)</th>
-                                            <th>Giá bán</th>
-                                            <th>Ngày cập nhật</th>
-                                            <th>Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>FR001</td>
-                                            <td>French Fries</td>
-                                            <td class="cost-price">$6.67</td>
-                                            <td class="profit-percentage">50%</td>
-                                            <td class="selling-price">$10.00</td>
-                                            <td>15/05/2023</td>
-                                            <td>
-                                                <a href="pricingedit.html" class="btn btn-sm btn-custom">
-                                                    <i class="fas fa-edit"></i> Sửa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -576,25 +737,226 @@ function redirectOnAllCategory(selectElement) {
                 }
             });
 
-            // Xử lý chuyển trang khi chọn loại sản phẩm
+            // Xử lý sự kiện khi chọn loại sản phẩm
             document.getElementById('categorySelect').addEventListener('change', function() {
                 const selectedCategory = this.value;
+                filterProductsByCategory(selectedCategory);
+            });
+
+            // Hàm lọc sản phẩm theo loại
+            function filterProductsByCategory(category) {
+                // Ẩn tất cả các phần danh mục
+                const allCategoryContainers = document.querySelectorAll('.category-container');
+                allCategoryContainers.forEach(container => {
+                    container.style.display = 'none';
+                });
+
+                // Nếu chọn "Tất cả", hiển thị tất cả
+                if (category === 'all') {
+                    allCategoryContainers.forEach(container => {
+                        container.style.display = 'block';
+                    });
+                    return;
+                }
+
+                // Hiển thị danh mục được chọn
+                const selectedContainer = document.querySelector(`.category-container[data-category="${category}"]`);
+                if (selectedContainer) {
+                    selectedContainer.style.display = 'block';
+                }
+            }
+
+            // Khởi tạo: hiển thị tất cả danh mục
+            filterProductsByCategory('all');
+
+            // Xử lý tìm kiếm sản phẩm
+            document.getElementById('global-search-form').addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                // Định nghĩa các trang tương ứng với từng loại sản phẩm
-                const categoryPages = {
-                    'all': 'pricingproducts.html',
-                    'pizza': 'pricingproductspizza.html',
-                    'burger': 'pricingproductsburger.html',
-                    'pasta': 'pricingproductspasta.html',
-                    'fries': 'pricingproductsfries.html'
-                };
+                const searchTerm = document.getElementById('global-search-input').value.trim();
                 
-                // Chuyển hướng đến trang tương ứng
-                if (categoryPages[selectedCategory]) {
-                    window.location.href = categoryPages[selectedCategory];
+                if (searchTerm) {
+                    // Thực hiện tìm kiếm trong trang
+                    searchProducts(searchTerm);
+                } else {
+                    // Nếu không có từ khóa, hiển thị lại tất cả
+                    resetSearch();
                 }
             });
+            
+            // Xử lý sự kiện nhấn phím Enter trong ô tìm kiếm
+            document.getElementById('global-search-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    document.getElementById('global-search-form').dispatchEvent(new Event('submit'));
+                }
+            });
+
+            // Thêm sự kiện click cho các header danh mục để mở/đóng
+            const categoryHeaders = document.querySelectorAll('.category-header');
+            categoryHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const categoryId = this.id.replace('-header', '');
+                    const content = document.getElementById(`${categoryId}-content`);
+                    
+                    if (content.classList.contains('show')) {
+                        content.classList.remove('show');
+                        this.classList.remove('expanded');
+                    } else {
+                        content.classList.add('show');
+                        this.classList.add('expanded');
+                    }
+                });
+            });
         });
+
+        // Hàm tìm kiếm sản phẩm
+        function searchProducts(searchTerm) {
+            // Hiển thị tất cả các danh mục
+            const allCategoryContainers = document.querySelectorAll('.category-container');
+            allCategoryContainers.forEach(container => {
+                container.style.display = 'block';
+            });
+
+            // Tìm kiếm trong tất cả các hàng của bảng
+            const allRows = document.querySelectorAll('tbody tr');
+            let foundResults = false;
+            
+            allRows.forEach(row => {
+                const productCode = row.cells[0].textContent;
+                const productName = row.cells[1].textContent;
+                
+                // Kiểm tra xem mã sản phẩm hoặc tên sản phẩm có chứa từ khóa tìm kiếm không
+                if (productCode.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                    productName.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    row.style.display = '';
+                    foundResults = true;
+                    
+                    // Đảm bảo danh mục chứa sản phẩm này được hiển thị và mở rộng
+                    const categoryContainer = row.closest('.category-container');
+                    if (categoryContainer) {
+                        categoryContainer.style.display = 'block';
+                        const categoryId = categoryContainer.getAttribute('data-category');
+                        const header = document.getElementById(`${categoryId}-header`);
+                        const content = document.getElementById(`${categoryId}-content`);
+                        
+                        if (header && content) {
+                            content.classList.add('show');
+                            header.classList.add('expanded');
+                        }
+                    }
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            
+            // Nếu không tìm thấy kết quả, hiển thị thông báo
+            if (!foundResults) {
+                alert(`Không tìm thấy sản phẩm nào phù hợp với từ khóa "${searchTerm}"`);
+            }
+        }
+
+        // Hàm đặt lại tìm kiếm
+        function resetSearch() {
+            const allRows = document.querySelectorAll('tbody tr');
+            allRows.forEach(row => {
+                row.style.display = '';
+            });
+            
+            // Hiển thị tất cả các danh mục
+            filterProductsByCategory('all');
+        }
+
+        // Hàm chỉnh sửa tỷ lệ lợi nhuận
+        function editProfitPercentage(id, currentValue) {
+            const profitCell = document.getElementById(`profit-cell-${id}`);
+            
+            // Tạo form chỉnh sửa
+            const editForm = document.createElement('div');
+            editForm.className = 'edit-form';
+            
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.className = 'editable-input';
+            input.value = currentValue;
+            input.min = '0';
+            input.max = '100';
+            input.step = '0.5';
+            
+            const actions = document.createElement('div');
+            actions.className = 'edit-actions';
+            
+            const saveBtn = document.createElement('button');
+            saveBtn.type = 'button';
+            saveBtn.className = 'save-btn';
+            saveBtn.textContent = 'Lưu';
+            saveBtn.onclick = function() {
+                saveProfitPercentage(id, input.value);
+            };
+            
+            const cancelBtn = document.createElement('button');
+            cancelBtn.type = 'button';
+            cancelBtn.className = 'cancel-btn';
+            cancelBtn.textContent = 'Hủy';
+            cancelBtn.onclick = function() {
+                cancelEdit(id, currentValue);
+            };
+            
+            actions.appendChild(saveBtn);
+            actions.appendChild(cancelBtn);
+            
+            editForm.appendChild(input);
+            editForm.appendChild(actions);
+            
+            // Thay thế nội dung ô bằng form chỉnh sửa
+            profitCell.innerHTML = '';
+            profitCell.appendChild(editForm);
+            
+            // Tự động focus vào input
+            input.focus();
+        }
+
+        // Hàm lưu tỷ lệ lợi nhuận
+        function saveProfitPercentage(id, newValue) {
+            // Tìm hàng chứa nút đã nhấn
+            const row = document.getElementById(`profit-cell-${id}`).closest('tr');
+            
+            // Cập nhật giá bán dựa trên tỷ lệ lợi nhuận mới
+            const costPrice = parseFloat(row.querySelector('.cost-price').textContent.replace('$', ''));
+            const newSellingPrice = costPrice * (1 + parseFloat(newValue) / 100);
+            
+            // Định dạng số
+            const formattedSellingPrice = '$' + newSellingPrice.toFixed(2);
+            
+            // Cập nhật giá bán trong bảng
+            row.querySelector('.selling-price').textContent = formattedSellingPrice;
+            
+            // Cập nhật tỷ lệ lợi nhuận
+            const profitCell = document.getElementById(`profit-cell-${id}`);
+            
+            const newProfitSpan = document.createElement('span');
+            newProfitSpan.className = 'profit-percentage';
+            newProfitSpan.textContent = `${newValue}%`;
+            
+            profitCell.innerHTML = '';
+            profitCell.appendChild(newProfitSpan);
+            
+            // Hiển thị thông báo thành công
+            alert(`Đã cập nhật tỷ lệ lợi nhuận thành ${newValue}%`);
+        }
+
+        // Hàm hủy chỉnh sửa
+        function cancelEdit(id, originalValue) {
+            const profitCell = document.getElementById(`profit-cell-${id}`);
+            
+            // Khôi phục lại trạng thái ban đầu
+            const newProfitSpan = document.createElement('span');
+            newProfitSpan.className = 'profit-percentage';
+            newProfitSpan.textContent = `${originalValue}%`;
+            
+            profitCell.innerHTML = '';
+            profitCell.appendChild(newProfitSpan);
+        }
     </script>
 </body>
 </html>

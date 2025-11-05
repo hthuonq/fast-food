@@ -283,11 +283,12 @@
         }
         
         .editable-input {
-            width: 100%;
+            width: 80px;
             padding: 4px 8px;
             border: 1px solid #ffbe33;
             border-radius: 3px;
             font-size: 14px;
+            text-align: center;
         }
         
         .save-btn {
@@ -324,12 +325,19 @@
         .edit-form {
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
             gap: 5px;
         }
         
         .edit-actions {
             display: flex;
             justify-content: flex-start;
+        }
+        
+        .profit-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
     </style>
 </head>
@@ -438,15 +446,16 @@
                 <!-- Tabs Navigation -->
                 <ul class="nav nav-tabs" id="pricingTabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="category-tab" data-bs-toggle="tab" href="#category" role="tab" aria-controls="category" aria-selected="true">
+                        <a class="nav-link active" href="pricing.html">
                             <i class="fas fa-tags me-2"></i>Tỷ lệ lợi nhuận theo loại sản phẩm
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="product-tab" data-bs-toggle="tab" href="#product" role="tab" aria-controls="product" aria-selected="false">
+                        <a class="nav-link " href="pricingproducts.html">
                             <i class="fas fa-hamburger me-2"></i>Tỷ lệ lợi nhuận theo sản phẩm
                         </a>
                     </li>
+                   
                 </ul>
                 
                 <!-- Tab Content -->
@@ -456,9 +465,7 @@
                         <div class="card card-custom mt-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title mb-0">Tỷ lệ lợi nhuận theo loại sản phẩm</h5>
-                                <a href="pricingedit.html" class="btn btn-custom">
-                                    <i class="fas fa-plus me-2"></i>Thêm mới
-                                </a>
+                                
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -471,98 +478,67 @@
                                                 <th>Giá bán (VNĐ)</th>
                                                 <th>Ngày cập nhật</th>
                                                 <th>Tỷ lệ lợi nhuận (%)</th>
-                                                <th>Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>CAT001</td>
                                                 <td>Pizza</td>
-                                                <td class="cost-price">150,000</td>
-                                                <td class="selling-price">195,000</td>
+                                                <td class="cost-price">100,000</td>
+                                                <td class="selling-price">150,000</td>
                                                 <td>15/05/2023</td>
                                                 <td>
-                                                    <span class="profit-percentage">30%</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-custom" onclick="redirectToEditPage('CAT001')">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
+                                                    <div class="profit-cell" id="profit-cell-CAT001">
+                                                        <span class="profit-percentage">30%</span>
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('CAT001', '30')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>CAT002</td>
                                                 <td>Burger</td>
-                                                <td class="cost-price">80,000</td>
-                                                <td class="selling-price">108,000</td>
+                                                <td class="cost-price">30,000</td>
+                                                <td class="selling-price">50,000</td>
                                                 <td>14/05/2023</td>
                                                 <td>
-                                                    <span class="profit-percentage">35%</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-custom" onclick="redirectToEditPage('CAT002')">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
+                                                    <div class="profit-cell" id="profit-cell-CAT002">
+                                                        <span class="profit-percentage">35%</span>
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('CAT002', '35')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>CAT003</td>
                                                 <td>Pasta</td>
-                                                <td class="cost-price">120,000</td>
-                                                <td class="selling-price">168,000</td>
+                                                <td class="cost-price">50,000</td>
+                                                <td class="selling-price">80,000</td>
                                                 <td>12/05/2023</td>
                                                 <td>
-                                                    <span class="profit-percentage">40%</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-custom" onclick="redirectToEditPage('CAT003')">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
+                                                    <div class="profit-cell" id="profit-cell-CAT003">
+                                                        <span class="profit-percentage">40%</span>
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('CAT003', '40')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>CAT004</td>
-                                                <td>Fries</td>
-                                                <td class="cost-price">45,000</td>
-                                                <td class="selling-price">67,500</td>
+                                                <td>Khoai tây chiên</td>
+                                                <td class="cost-price">10,000</td>
+                                                <td class="selling-price">20,000</td>
                                                 <td>10/05/2023</td>
                                                 <td>
-                                                    <span class="profit-percentage">50%</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-custom" onclick="redirectToEditPage('CAT004')">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>CAT005</td>
-                                                <td>Salad</td>
-                                                <td class="cost-price">65,000</td>
-                                                <td class="selling-price">84,500</td>
-                                                <td>09/05/2023</td>
-                                                <td>
-                                                    <span class="profit-percentage">30%</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-custom" onclick="redirectToEditPage('CAT005')">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>CAT006</td>
-                                                <td>Đồ uống</td>
-                                                <td class="cost-price">25,000</td>
-                                                <td class="selling-price">37,500</td>
-                                                <td>08/05/2023</td>
-                                                <td>
-                                                    <span class="profit-percentage">50%</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-custom" onclick="redirectToEditPage('CAT006')">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
+                                                    <div class="profit-cell" id="profit-cell-CAT004">
+                                                        <span class="profit-percentage">50%</span>
+                                                        <button class="btn btn-sm btn-custom" onclick="editProfitPercentage('CAT004', '50')">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -572,85 +548,7 @@
                         </div>
                     </div>
                     
-                    <!-- Product Profit Percentage Tab -->
-                    <div class="tab-pane fade" id="product" role="tabpanel" aria-labelledby="product-tab">
-                        <div class="card card-custom mt-4">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Tỷ lệ lợi nhuận theo sản phẩm</h5>
-                                <a href="pricingedit.html" class="btn btn-custom">
-                                    <i class="fas fa-plus me-2"></i>Thêm mới
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Mã sản phẩm</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Loại sản phẩm</th>
-                                                <th>Giá vốn (VNĐ)</th>
-                                                <th>Giá bán (VNĐ)</th>
-                                                <th>Ngày cập nhật</th>
-                                                <th>Tỷ lệ lợi nhuận (%)</th>
-                                                <th>Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>PROD001</td>
-                                                <td>Pizza Hải Sản</td>
-                                                <td>Pizza</td>
-                                                <td class="cost-price">180,000</td>
-                                                <td class="selling-price">234,000</td>
-                                                <td>15/05/2023</td>
-                                                <td>
-                                                    <span class="profit-percentage">30%</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-custom" onclick="redirectToEditPage('PROD001')">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>PROD002</td>
-                                                <td>Burger Bò Phô Mai</td>
-                                                <td>Burger</td>
-                                                <td class="cost-price">95,000</td>
-                                                <td class="selling-price">128,250</td>
-                                                <td>14/05/2023</td>
-                                                <td>
-                                                    <span class="profit-percentage">35%</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-custom" onclick="redirectToEditPage('PROD002')">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>PROD003</td>
-                                                <td>Pasta Carbonara</td>
-                                                <td>Pasta</td>
-                                                <td class="cost-price">135,000</td>
-                                                <td class="selling-price">189,000</td>
-                                                <td>12/05/2023</td>
-                                                <td>
-                                                    <span class="profit-percentage">40%</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-custom" onclick="redirectToEditPage('PROD003')">
-                                                        <i class="fas fa-edit"></i> Sửa
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -707,9 +605,111 @@
             });
         });
 
-        // Hàm chuyển hướng đến trang chỉnh sửa
-        function redirectToEditPage(id) {
-            window.location.href = `pricingsua.html?id=${id}`;
+        // Hàm chỉnh sửa tỷ lệ lợi nhuận
+        function editProfitPercentage(id, currentValue) {
+            const profitCell = document.getElementById(`profit-cell-${id}`);
+            
+            // Tạo form chỉnh sửa
+            const editForm = document.createElement('div');
+            editForm.className = 'edit-form';
+            
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.className = 'editable-input';
+            input.value = currentValue;
+            input.min = '0';
+            input.max = '100';
+            input.step = '0.5';
+            
+            const actions = document.createElement('div');
+            actions.className = 'edit-actions';
+            
+            const saveBtn = document.createElement('button');
+            saveBtn.type = 'button';
+            saveBtn.className = 'save-btn';
+            saveBtn.textContent = 'Lưu';
+            saveBtn.onclick = function() {
+                saveProfitPercentage(id, input.value);
+            };
+            
+            const cancelBtn = document.createElement('button');
+            cancelBtn.type = 'button';
+            cancelBtn.className = 'cancel-btn';
+            cancelBtn.textContent = 'Hủy';
+            cancelBtn.onclick = function() {
+                cancelEdit(id, currentValue);
+            };
+            
+            actions.appendChild(saveBtn);
+            actions.appendChild(cancelBtn);
+            
+            editForm.appendChild(input);
+            editForm.appendChild(actions);
+            
+            // Thay thế nội dung ô bằng form chỉnh sửa
+            profitCell.innerHTML = '';
+            profitCell.appendChild(editForm);
+            
+            // Tự động focus vào input
+            input.focus();
+        }
+
+        // Hàm lưu tỷ lệ lợi nhuận
+        function saveProfitPercentage(id, newValue) {
+            // Tìm hàng chứa nút đã nhấn
+            const row = document.getElementById(`profit-cell-${id}`).closest('tr');
+            
+            // Cập nhật giá bán dựa trên tỷ lệ lợi nhuận mới
+            const costPrice = parseFloat(row.querySelector('.cost-price').textContent.replace(/,/g, ''));
+            const newSellingPrice = costPrice * (1 + parseFloat(newValue) / 100);
+            
+            // Định dạng số
+            const formattedSellingPrice = new Intl.NumberFormat('vi-VN').format(newSellingPrice);
+            
+            // Cập nhật giá bán trong bảng
+            row.querySelector('.selling-price').textContent = formattedSellingPrice;
+            
+            // Cập nhật tỷ lệ lợi nhuận
+            const profitCell = document.getElementById(`profit-cell-${id}`);
+            
+            const newProfitSpan = document.createElement('span');
+            newProfitSpan.className = 'profit-percentage';
+            newProfitSpan.textContent = `${newValue}%`;
+            
+            const editButton = document.createElement('button');
+            editButton.className = 'btn btn-sm btn-custom';
+            editButton.innerHTML = '<i class="fas fa-edit"></i> Sửa';
+            editButton.onclick = function() {
+                editProfitPercentage(id, newValue);
+            };
+            
+            profitCell.innerHTML = '';
+            profitCell.appendChild(newProfitSpan);
+            profitCell.appendChild(editButton);
+            
+            // Hiển thị thông báo thành công
+            alert(`Đã cập nhật tỷ lệ lợi nhuận thành ${newValue}%`);
+        }
+
+        // Hàm hủy chỉnh sửa
+        function cancelEdit(id, originalValue) {
+            const profitCell = document.getElementById(`profit-cell-${id}`);
+            
+            // Khôi phục lại trạng thái ban đầu
+            const newProfitSpan = document.createElement('span');
+            newProfitSpan.className = 'profit-percentage';
+            newProfitSpan.textContent = `${originalValue}%`;
+            
+            const editButton = document.createElement('button');
+            editButton.className = 'btn btn-sm btn-custom';
+            editButton.innerHTML = '<i class="fas fa-edit"></i> Sửa';
+            editButton.onclick = function() {
+                editProfitPercentage(id, originalValue);
+            };
+            
+            profitCell.innerHTML = '';
+            profitCell.appendChild(newProfitSpan);
+            profitCell.appendChild(editButton);
         }
     </script>
 </body>
