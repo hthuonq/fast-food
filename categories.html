@@ -23,6 +23,39 @@
             overflow-x: hidden;
         }
         
+        .global-search-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-input-container {
+            flex-grow: 1;
+            position: relative;
+        }
+        
+        .search-input {
+            padding-right: 45px;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        
+        .search-btn {
+            white-space: nowrap;
+        }
         .sidebar {
             position: fixed;
             top: 0;
@@ -340,7 +373,16 @@
                 <h1 class="page-title">Loại sản phẩm</h1>
                 <a href="categoriesaddsp.html" class="btn btn-custom">+ Thêm sản phẩm mới</a>
             </div>
-            
+
+            <div class="global-search-container">
+                <h5 class="mb-3"><i class="fas fa-search me-2"></i>Tra cứu</h5>
+                <form class="search-form" id="global-search-form">
+                    <div class="search-input-container">
+                        <input type="text" class="form-control search-input" id="global-search-input" placeholder="Nhập tên hoặc mã sản phẩm...">
+                    </div>
+                    <a href="categoriesfind.html" class="category-btn active">OK</a>
+                </form>
+            </div>
             <!-- Thanh phân loại -->
             <div class="category-filter">
                 <a href="categories.html" class="category-btn active">Tất cả</a>
