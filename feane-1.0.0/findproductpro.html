@@ -199,6 +199,18 @@
       text-decoration: none;
     }
 
+    .input-error {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+    }
+
+    .validation-message {
+      color: #e74c3c;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      display: none;
+    }
+
     @media (max-width: 768px) {
       .price-range {
         flex-direction: column;
@@ -371,11 +383,13 @@
             <label class="form-label">Giá sản phẩm</label>
             <div class="price-range">
               <div class="form-group price-input-group">
-                <input type="number" class="form-control" name="minPrice" placeholder="0" min="0" step="1000">
+                <input type="text" class="form-control price-input" id="minPrice" name="minPrice" placeholder="0" pattern="\d*" inputmode="numeric">
+                <div class="validation-message" id="minPriceError">Vui lòng nhập số hợp lệ</div>
               </div>
               <div class="price-separator">-</div>
               <div class="form-group price-input-group">
-                <input type="number" class="form-control" name="maxPrice" placeholder="500000" min="0" step="1000">
+                <input type="text" class="form-control price-input" id="maxPrice" name="maxPrice" placeholder="500000" pattern="\d*" inputmode="numeric">
+                <div class="validation-message" id="maxPriceError">Vui lòng nhập số hợp lệ</div>
               </div>
             </div>
           </div>
@@ -383,10 +397,10 @@
 
         <!-- Nút tìm kiếm -->
         <div class="search-buttons">
-          <a href="searchresults.html" class="btn btn-search">
+          <button type="submit" class="btn btn-search">
             <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
-          </a>
-          
+          </button>
+          <button type="reset" class="btn btn-reset">Đặt lại</button>
         </div>
       </form>
 
@@ -499,38 +513,98 @@
   <script src="js/custom.js"></script>
 
   <script>
-    // Hàm định dạng tiền Việt Nam
-    function formatVND(amount) {
-      return new Intl.NumberFormat('vi-VN', { 
-        style: 'currency', 
-        currency: 'VND',
-        minimumFractionDigits: 0
-      }).format(amount);
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+      const minPriceInput = document.getElementById('minPrice');
+      const maxPriceInput = document.getElementById('maxPrice');
+      const minPriceError = document.getElementById('minPriceError');
+      const maxPriceError = document.getElementById('maxPriceError');
+      
+      // Hàm kiểm tra và chặn ký tự không phải số
+      function validateNumberInput(input, errorElement) {
+        // Loại bỏ ký tự không phải số
+        input.value = input.value.replace(/[^0-9]/g, '');
+        
+        // Kiểm tra giá trị hợp lệ
+        if (input.value && isNaN(input.value)) {
+          errorElement.style.display = 'block';
+          input.classList.add('input-error');
+        } else {
+          errorElement.style.display = 'none';
+          input.classList.remove('input-error');
+        }
+      }
+      
+      // Thêm sự kiện input cho các trường giá
+      minPriceInput.addEventListener('input', function() {
+        validateNumberInput(minPriceInput, minPriceError);
+      });
+      
+      maxPriceInput.addEventListener('input', function() {
+        validateNumberInput(maxPriceInput, maxPriceError);
+      });
+      
+      // Thêm sự kiện blur để kiểm tra cuối cùng
+      minPriceInput.addEventListener('blur', function() {
+        validateNumberInput(minPriceInput, minPriceError);
+      });
+      
+      maxPriceInput.addEventListener('blur', function() {
+        validateNumberInput(maxPriceInput, maxPriceError);
+      });
+      
+      // Thêm sự kiện paste để xử lý khi người dùng dán nội dung
+      minPriceInput.addEventListener('paste', function(e) {
+        // Cho phép paste, nhưng sẽ được xử lý bởi sự kiện input
+        setTimeout(function() {
+          validateNumberInput(minPriceInput, minPriceError);
+        }, 0);
+      });
+      
+      maxPriceInput.addEventListener('paste', function(e) {
+        setTimeout(function() {
+          validateNumberInput(maxPriceInput, maxPriceError);
+        }, 0);
+      });
 
-    // Thêm sự kiện cho form để xử lý tìm kiếm
-    document.querySelector('.advanced-search-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Lấy giá trị từ form
-      const searchParams = new URLSearchParams();
-      const productName = this.querySelector('input[name="q"]').value;
-      const category = this.querySelector('select[name="category"]').value;
-      const minPrice = this.querySelector('input[name="minPrice"]').value;
-      const maxPrice = this.querySelector('input[name="maxPrice"]').value;
-      
-      if (productName) searchParams.append('q', productName);
-      if (category) searchParams.append('category', category);
-      if (minPrice) searchParams.append('minPrice', minPrice);
-      if (maxPrice) searchParams.append('maxPrice', maxPrice);
-      
-      // Chuyển hướng đến trang kết quả tìm kiếm
-      window.location.href = 'searchresults.html?' + searchParams.toString();
-    });
+      // Hàm định dạng tiền Việt Nam
+      function formatVND(amount) {
+        return new Intl.NumberFormat('vi-VN', { 
+          style: 'currency', 
+          currency: 'VND',
+          minimumFractionDigits: 0
+        }).format(amount);
+      }
 
-    // Thêm sự kiện cho nút đặt lại
-    document.querySelector('button[type="reset"]').addEventListener('click', function() {
-      document.querySelector('.advanced-search-form').reset();
+      // Thêm sự kiện cho form để xử lý tìm kiếm
+      document.querySelector('.advanced-search-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Lấy giá trị từ form
+        const searchParams = new URLSearchParams();
+        const productName = this.querySelector('input[name="q"]').value;
+        const category = this.querySelector('select[name="category"]').value;
+        const minPrice = this.querySelector('input[name="minPrice"]').value;
+        const maxPrice = this.querySelector('input[name="maxPrice"]').value;
+        
+        if (productName) searchParams.append('q', productName);
+        if (category) searchParams.append('category', category);
+        if (minPrice) searchParams.append('minPrice', minPrice);
+        if (maxPrice) searchParams.append('maxPrice', maxPrice);
+        
+        // Chuyển hướng đến trang kết quả tìm kiếm
+        window.location.href = 'searchresults.html?' + searchParams.toString();
+      });
+
+      // Thêm sự kiện cho nút đặt lại
+      document.querySelector('button[type="reset"]').addEventListener('click', function() {
+        document.querySelector('.advanced-search-form').reset();
+        
+        // Đặt lại trạng thái lỗi
+        minPriceError.style.display = 'none';
+        maxPriceError.style.display = 'none';
+        minPriceInput.classList.remove('input-error');
+        maxPriceInput.classList.remove('input-error');
+      });
     });
   </script>
 
