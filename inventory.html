@@ -137,23 +137,6 @@
             }
         }
         
-        .badge-status-new {
-            background-color: #17a2b8;
-        }
-        
-        .badge-status-processing {
-            background-color: #ffc107;
-            color: #212529;
-        }
-        
-        .badge-status-shipped {
-            background-color: #28a745;
-        }
-        
-        .badge-status-cancelled {
-            background-color: #dc3545;
-        }
-        
         .action-buttons .btn {
             margin-right: 5px;
         }
@@ -165,6 +148,14 @@
         
         .low-stock {
             background-color: #ffdddd;
+        }
+        
+        .stock-status-out {
+            background-color: #ffcccc;
+        }
+        
+        .stock-status-adequate {
+            background-color: #ddffdd;
         }
         
         .search-box {
@@ -210,19 +201,41 @@
             background-color: #007bff !important;
         }
         
-        .stock-status-low {
-            background-color: #ffdddd;
-        }
-        
-        .stock-status-adequate {
-            background-color: #ddffdd;
-        }
-        
         .date-range-filter {
             background-color: rgba(255, 255, 255, 0.3);
             padding: 15px;
             border-radius: 8px;
             margin-top: 15px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        
+        .action-buttons .btn {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons .btn {
+                margin-bottom: 0.25rem;
+                margin-right: 0;
+            }
+            
+            .table-responsive table {
+                font-size: 0.875rem;
+            }
+            
+            .table-responsive th,
+            .table-responsive td {
+                padding: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -319,11 +332,11 @@
                     <h3><i class="fas fa-filter me-2"></i>Bộ lọc tồn kho</h3>
                     <form id="stock-filter-form">
                         <div class="row">
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="search-name" class="form-label">Tìm sản phẩm</label>
                                 <input type="text" class="form-control" id="search-name" name="search" placeholder="Nhập tên sản phẩm...">
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="filter-type" class="form-label">Loại sản phẩm</label>
                                 <select class="form-select" id="filter-type" name="type">
                                     <option value="">Tất cả</option>
@@ -333,20 +346,12 @@
                                     <option value="Pasta">Pasta</option>
                                 </select>
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="stock-status" class="form-label">Trạng thái tồn kho</label>
                                 <select class="form-select" id="stock-status" name="stock-status">
                                     <option value="">Tất cả</option>
                                     <option value="low">Sắp hết hàng</option>
                                     <option value="adequate">Đủ hàng</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="sort-by" class="form-label">Sắp xếp theo</label>
-                                <select class="form-select" id="sort-by" name="sort">
-                                    <option value="name">Tên sản phẩm</option>
-                                    <option value="stock">Số lượng tồn</option>
-                                    <option value="type">Loại sản phẩm</option>
                                 </select>
                             </div>
                         </div>
@@ -390,37 +395,31 @@
                 <!-- Statistics Cards -->
                 <div class="row dashboard-stats mb-4">
                     <div class="col-md-4">
-                        <a href="inventory.html" style="text-decoration: none; display: block;">
-                            <div class="card card-custom bg-primary-custom">
-                                <div class="card-body stat-card">
-                                    <i class="fas fa-boxes"></i>
-                                    <h3 id="total-products">8</h3>
-                                    <p>Tổng sản phẩm</p>
-                                </div>
+                        <div class="card card-custom bg-primary-custom">
+                            <div class="card-body stat-card">
+                                <i class="fas fa-boxes"></i>
+                                <h3 id="total-products">8</h3>
+                                <p>Tổng sản phẩm</p>
                             </div>
-                        </a>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <a href="inventory.html?stock-status=adequate" style="text-decoration: none; display: block;">
-                            <div class="card card-custom" style="background-color: #28a745; color: white;">
-                                <div class="card-body stat-card">
-                                    <i class="fas fa-check-circle"></i>
-                                    <h3 id="in-stock-products">5</h3>
-                                    <p>Sản phẩm đủ hàng</p>
-                                </div>
+                        <div class="card card-custom" style="background-color: #28a745; color: white;">
+                            <div class="card-body stat-card">
+                                <i class="fas fa-check-circle"></i>
+                                <h3 id="in-stock-products">5</h3>
+                                <p>Sản phẩm đủ hàng</p>
                             </div>
-                        </a>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <a href="inventory.html?stock-status=low" style="text-decoration: none; display: block;">
-                            <div class="card card-custom" style="background-color: #dc3545; color: white;">
-                                <div class="card-body stat-card">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                    <h3 id="low-stock-products">3</h3>
-                                    <p>Sản phẩm sắp hết</p>
-                                </div>
+                        <div class="card card-custom" style="background-color: #dc3545; color: white;">
+                            <div class="card-body stat-card">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3 id="low-stock-products">3</h3>
+                                <p>Sản phẩm sắp hết</p>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
                 
@@ -511,7 +510,6 @@
                 const search = document.getElementById('search-name').value;
                 const type = document.getElementById('filter-type').value;
                 const stockStatus = document.getElementById('stock-status').value;
-                const sort = document.getElementById('sort-by').value;
                 const dateFrom = document.getElementById('date-from').value;
                 const dateTo = document.getElementById('date-to').value;
                 const enableDateFilter = document.getElementById('enable-date-filter').checked;
@@ -523,7 +521,6 @@
                 if (search) params.push(`search=${encodeURIComponent(search)}`);
                 if (type) params.push(`type=${encodeURIComponent(type)}`);
                 if (stockStatus) params.push(`stock-status=${stockStatus}`);
-                if (sort) params.push(`sort=${sort}`);
                 if (enableDateFilter && dateFrom) params.push(`date-from=${dateFrom}`);
                 if (enableDateFilter && dateTo) params.push(`date-to=${dateTo}`);
                 if (enableDateFilter) params.push(`enable-date-filter=true`);
@@ -552,6 +549,14 @@
             
             // Đặt giá trị mặc định cho ngày (30 ngày gần nhất)
             setDefaultDateRange();
+            
+            // Cải thiện hiển thị cho mobile
+            if (window.innerWidth <= 768) {
+                document.querySelector('.sidebar').style.width = '70px';
+                document.querySelector('.main-content').style.marginLeft = '70px';
+                const navTexts = document.querySelectorAll('.sidebar .nav-link span');
+                navTexts.forEach(text => text.style.display = 'none');
+            }
         });
         
         // Hàm đặt khoảng ngày mặc định (30 ngày gần nhất)
@@ -578,7 +583,6 @@
             const search = urlParams.get('search');
             const type = urlParams.get('type');
             const stockStatus = urlParams.get('stock-status');
-            const sort = urlParams.get('sort');
             const dateFrom = urlParams.get('date-from');
             const dateTo = urlParams.get('date-to');
             const enableDateFilter = urlParams.get('enable-date-filter');
@@ -592,9 +596,11 @@
                     importQty: 100, 
                     exportQty: 95, 
                     stockQty: 5,
-                    image: 'feane-1.0.0/images/f1.png',
                     lastImportDate: '15/05/2025',
-                    lastExportDate: '14/05/2025'
+                    lastExportDate: '14/05/2025',
+                    unit: 'Cái',
+                    minStock: 10,
+                    supplier: 'Nhà cung cấp A'
                 },
                 { 
                     id: 'SP02', 
@@ -603,9 +609,11 @@
                     importQty: 80, 
                     exportQty: 60, 
                     stockQty: 20,
-                    image: 'feane-1.0.0/images/f2.png',
                     lastImportDate: '12/10/2025',
-                    lastExportDate: '1/11/2025'
+                    lastExportDate: '1/11/2025',
+                    unit: 'Cái',
+                    minStock: 15,
+                    supplier: 'Nhà cung cấp B'
                 },
                 { 
                     id: 'SP03', 
@@ -614,20 +622,24 @@
                     importQty: 150, 
                     exportQty: 145, 
                     stockQty: 5,
-                    image: 'feane-1.0.0/images/f4.png',
                     lastImportDate: '10/09/2025',
-                    lastExportDate: '12/09/2025'
+                    lastExportDate: '12/09/2025',
+                    unit: 'Phần',
+                    minStock: 20,
+                    supplier: 'Nhà cung cấp C'
                 },
                 { 
                     id: 'SP04', 
-                    name: 'Burger gà chiên', 
+                    name: 'Burger Gà Chiên', 
                     type: 'Burger', 
                     importQty: 120, 
                     exportQty: 115, 
                     stockQty: 5,
-                    image: 'ffeane-1.0.0/images/f7.png',
                     lastImportDate: '13/10/2025',
-                    lastExportDate: '14/10/2025'
+                    lastExportDate: '14/10/2025',
+                    unit: 'Cái',
+                    minStock: 10,
+                    supplier: 'Nhà cung cấp B'
                 },
                 { 
                     id: 'SP05', 
@@ -636,9 +648,11 @@
                     importQty: 90, 
                     exportQty: 85, 
                     stockQty: 5,
-                    image: 'feane-1.0.0/images/f6.png',
                     lastImportDate: '11/09/2025',
-                    lastExportDate: '13/09/2025'
+                    lastExportDate: '13/09/2025',
+                    unit: 'Đĩa',
+                    minStock: 8,
+                    supplier: 'Nhà cung cấp D'
                 },
                 { 
                     id: 'SP06', 
@@ -647,9 +661,37 @@
                     importQty: 70, 
                     exportQty: 65, 
                     stockQty: 5,
-                    image: 'feane-1.0.0/images/f7.png',
                     lastImportDate: '09/10/2025',
-                    lastExportDate: '12/10/2025'
+                    lastExportDate: '12/10/2025',
+                    unit: 'Đĩa',
+                    minStock: 5,
+                    supplier: 'Nhà cung cấp D'
+                },
+                { 
+                    id: 'SP07', 
+                    name: 'Pizza Thập Cẩm', 
+                    type: 'Pizza', 
+                    importQty: 110, 
+                    exportQty: 85, 
+                    stockQty: 25,
+                    lastImportDate: '08/10/2025',
+                    lastExportDate: '10/10/2025',
+                    unit: 'Cái',
+                    minStock: 10,
+                    supplier: 'Nhà cung cấp A'
+                },
+                { 
+                    id: 'SP08', 
+                    name: 'Burger Tôm', 
+                    type: 'Burger', 
+                    importQty: 75, 
+                    exportQty: 50, 
+                    stockQty: 25,
+                    lastImportDate: '05/10/2025',
+                    lastExportDate: '07/10/2025',
+                    unit: 'Cái',
+                    minStock: 12,
+                    supplier: 'Nhà cung cấp B'
                 }
             ];
             
@@ -669,9 +711,9 @@
             
             if (stockStatus) {
                 if (stockStatus === 'low') {
-                    filteredItems = filteredItems.filter(item => item.stockQty <= 10);
+                    filteredItems = filteredItems.filter(item => item.stockQty <= item.minStock);
                 } else if (stockStatus === 'adequate') {
-                    filteredItems = filteredItems.filter(item => item.stockQty > 10);
+                    filteredItems = filteredItems.filter(item => item.stockQty > item.minStock);
                 }
             }
             
@@ -691,20 +733,6 @@
                         return itemDate <= toDate;
                     }
                     return true;
-                });
-            }
-            
-            // Sắp xếp dữ liệu
-            if (sort) {
-                filteredItems.sort((a, b) => {
-                    if (sort === 'name') {
-                        return a.name.localeCompare(b.name);
-                    } else if (sort === 'stock') {
-                        return a.stockQty - b.stockQty;
-                    } else if (sort === 'type') {
-                        return a.type.localeCompare(b.type);
-                    }
-                    return 0;
                 });
             }
             
@@ -736,25 +764,43 @@
             }
             
             items.forEach(item => {
-                const status = item.stockQty <= 10 ? 'Sắp hết hàng!' : 'Đủ hàng';
-                const statusClass = item.stockQty <= 10 ? 'warning' : '';
-                const rowClass = item.stockQty <= 10 ? 'low-stock' : '';
+                // Xác định trạng thái dựa trên số lượng tồn và mức tồn kho tối thiểu
+                let status, statusClass, rowClass;
+                
+                if (item.stockQty === 0) {
+                    status = 'Hết hàng!';
+                    statusClass = 'warning';
+                    rowClass = 'stock-status-out';
+                } else if (item.stockQty <= item.minStock) {
+                    status = 'Sắp hết hàng!';
+                    statusClass = 'warning';
+                    rowClass = 'stock-status-low';
+                } else {
+                    status = 'Đủ hàng';
+                    statusClass = '';
+                    rowClass = 'stock-status-adequate';
+                }
                 
                 const row = document.createElement('tr');
                 if (rowClass) row.className = rowClass;
                 
                 row.innerHTML = `
                     <td>${item.id}</td>
-                    <td><a href="stockdetails.html?id=${item.id}" class="product-link">${item.name}</a></td>
+                    <td>
+                        <a href="stockdetails.html?id=${item.id}" class="product-link">${item.name}</a>
+                        ${item.stockQty <= item.minStock ? '<i class="fas fa-exclamation-triangle text-warning ms-1"></i>' : ''}
+                    </td>
                     <td><a href="inventory.html?type=${encodeURIComponent(item.type)}" class="product-link">${item.type}</a></td>
-                    <td>${item.importQty}</td>
-                    <td>${item.exportQty}</td>
-                    <td>${item.stockQty}</td>
+                    <td>${item.importQty} ${item.unit}</td>
+                    <td>${item.exportQty} ${item.unit}</td>
+                    <td>${item.stockQty} ${item.unit}</td>
                     <td><span class="${statusClass}">${status}</span></td>
                     <td>
-                        <a href="stockdetails.html?id=${item.id}" class="btn btn-sm btn-custom">
-                            <i class="fas fa-eye me-1"></i>Xem
-                        </a>
+                        <div class="action-buttons">
+                            <button onclick="viewStockDetails('${item.id}')" class="btn btn-sm btn-custom">
+                                <i class="fas fa-eye me-1"></i>Xem
+                            </button>
+                        </div>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -764,12 +810,13 @@
         // Hàm cập nhật thống kê tồn kho
         function updateStockStats(items) {
             const totalProducts = items.length;
-            const inStockProducts = items.filter(item => item.stockQty > 10).length;
-            const lowStockProducts = items.filter(item => item.stockQty <= 10).length;
+            const inStockProducts = items.filter(item => item.stockQty > item.minStock).length;
+            const lowStockProducts = items.filter(item => item.stockQty <= item.minStock && item.stockQty > 0).length;
+            const outOfStockProducts = items.filter(item => item.stockQty === 0).length;
             
             document.getElementById('total-products').textContent = totalProducts;
             document.getElementById('in-stock-products').textContent = inStockProducts;
-            document.getElementById('low-stock-products').textContent = lowStockProducts;
+            document.getElementById('low-stock-products').textContent = lowStockProducts + outOfStockProducts;
         }
         
         // Hàm cập nhật giá trị trong form lọc
@@ -777,7 +824,6 @@
             const search = urlParams.get('search');
             const type = urlParams.get('type');
             const stockStatus = urlParams.get('stock-status');
-            const sort = urlParams.get('sort');
             const dateFrom = urlParams.get('date-from');
             const dateTo = urlParams.get('date-to');
             const enableDateFilter = urlParams.get('enable-date-filter');
@@ -785,10 +831,21 @@
             if (search) document.getElementById('search-name').value = search;
             if (type) document.getElementById('filter-type').value = type;
             if (stockStatus) document.getElementById('stock-status').value = stockStatus;
-            if (sort) document.getElementById('sort-by').value = sort;
             if (dateFrom) document.getElementById('date-from').value = dateFrom;
             if (dateTo) document.getElementById('date-to').value = dateTo;
             if (enableDateFilter) document.getElementById('enable-date-filter').checked = true;
+        }
+        
+        // Hàm xem chi tiết tồn kho
+        function viewStockDetails(productId) {
+            window.location.href = `stockdetails.html?id=${productId}`;
+        }
+        
+        // Hàm nhập sản phẩm
+        function importProduct(productId) {
+            alert(`Tính năng nhập hàng cho sản phẩm ${productId} sẽ được mở`);
+            // Trong thực tế, sẽ chuyển hướng đến trang nhập hàng với ID sản phẩm
+            // window.location.href = `imports.html?product=${productId}`;
         }
     </script>
 </body>
