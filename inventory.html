@@ -224,6 +224,43 @@
             border-radius: 8px;
             margin-top: 15px;
         }
+        
+        .detail-search-section {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .detail-search-result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        
+        .summary-card {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .summary-card.import {
+            background-color: #17a2b8;
+        }
+        
+        .summary-card.export {
+            background-color: #28a745;
+        }
+        
+        .summary-card.stock {
+            background-color: #6c757d;
+        }
     </style>
 </head>
 <body>
@@ -387,6 +424,80 @@
                     </form>
                 </div>
                 
+                <!-- Detail Search Section -->
+                <div class="detail-search-section">
+                    <h3><i class="fas fa-chart-line me-2"></i>Tra cứu chi tiết nhập - xuất - tồn</h3>
+                    <form id="detail-search-form">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="detail-product" class="form-label">Chọn sản phẩm</label>
+                                <select class="form-select" id="detail-product" name="detail-product">
+                                    <option value="">-- Chọn sản phẩm --</option>
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="detail-date-from" class="form-label">Từ ngày</label>
+                                <input type="date" class="form-control" id="detail-date-from" name="detail-date-from">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="detail-date-to" class="form-label">Đến ngày</label>
+                                <input type="date" class="form-control" id="detail-date-to" name="detail-date-to">
+                            </div>
+                            <div class="col-md-2 mb-3 d-flex align-items-end">
+                                <button type="submit" class="btn btn-dark w-100">
+                                    <i class="fas fa-search me-2"></i>Tra cứu
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <!-- Detail Search Result -->
+                    <div id="detail-search-result" class="detail-search-result">
+                        <h5>Kết quả tra cứu</h5>
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="summary-card import">
+                                    <i class="fas fa-arrow-down fa-2x"></i>
+                                    <h4 id="total-import">0</h4>
+                                    <p>Tổng nhập</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="summary-card export">
+                                    <i class="fas fa-arrow-up fa-2x"></i>
+                                    <h4 id="total-export">0</h4>
+                                    <p>Tổng xuất</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="summary-card stock">
+                                    <i class="fas fa-boxes fa-2x"></i>
+                                    <h4 id="total-stock">0</h4>
+                                    <p>Tồn cuối kỳ</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Ngày</th>
+                                        <th>Loại giao dịch</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn vị</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="detail-result-body">
+                                    <!-- Detail data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Statistics Cards -->
                 <div class="row dashboard-stats mb-4">
                     <div class="col-md-4">
@@ -547,11 +658,20 @@
                 window.location.href = 'inventory.html';
             });
             
+            // Xử lý form tra cứu chi tiết
+            document.getElementById('detail-search-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                performDetailSearch();
+            });
+            
             // Tải dữ liệu tồn kho dựa trên URL parameters
             loadStockFromURL();
             
             // Đặt giá trị mặc định cho ngày (30 ngày gần nhất)
             setDefaultDateRange();
+            
+            // Điền danh sách sản phẩm vào dropdown
+            populateProductSelect();
         });
         
         // Hàm đặt khoảng ngày mặc định (30 ngày gần nhất)
@@ -570,6 +690,212 @@
             
             document.getElementById('date-from').value = formatDate(thirtyDaysAgo);
             document.getElementById('date-to').value = formatDate(today);
+            
+            // Cũng đặt cho form tra cứu chi tiết
+            document.getElementById('detail-date-from').value = formatDate(thirtyDaysAgo);
+            document.getElementById('detail-date-to').value = formatDate(today);
+        }
+        
+        // Hàm điền danh sách sản phẩm vào dropdown
+        function populateProductSelect() {
+            const productSelect = document.getElementById('detail-product');
+            
+            // Dữ liệu mẫu với thông tin chi tiết
+            const stockItems = [
+                { 
+                    id: 'SP01', 
+                    name: 'Pizza Hải Sản', 
+                    type: 'Pizza', 
+                    importQty: 100, 
+                    exportQty: 95, 
+                    stockQty: 5,
+                    image: 'feane-1.0.0/images/f1.png',
+                    lastImportDate: '15/05/2025',
+                    lastExportDate: '14/05/2025'
+                },
+                { 
+                    id: 'SP02', 
+                    name: 'Burger Bò Phô Mai', 
+                    type: 'Burger', 
+                    importQty: 80, 
+                    exportQty: 60, 
+                    stockQty: 20,
+                    image: 'feane-1.0.0/images/f2.png',
+                    lastImportDate: '12/10/2025',
+                    lastExportDate: '1/11/2025'
+                },
+                { 
+                    id: 'SP03', 
+                    name: 'Khoai Tây Chiên', 
+                    type: 'Fries', 
+                    importQty: 150, 
+                    exportQty: 145, 
+                    stockQty: 5,
+                    image: 'feane-1.0.0/images/f4.png',
+                    lastImportDate: '10/09/2025',
+                    lastExportDate: '12/09/2025'
+                },
+                { 
+                    id: 'SP04', 
+                    name: 'Burger gà chiên', 
+                    type: 'Burger', 
+                    importQty: 120, 
+                    exportQty: 115, 
+                    stockQty: 5,
+                    image: 'feane-1.0.0/images/f7.png',
+                    lastImportDate: '13/10/2025',
+                    lastExportDate: '14/10/2025'
+                },
+                { 
+                    id: 'SP05', 
+                    name: 'Mỳ Ý Sốt Bò Bằm', 
+                    type: 'Pasta', 
+                    importQty: 90, 
+                    exportQty: 85, 
+                    stockQty: 5,
+                    image: 'feane-1.0.0/images/f6.png',
+                    lastImportDate: '11/09/2025',
+                    lastExportDate: '13/09/2025'
+                },
+                { 
+                    id: 'SP06', 
+                    name: 'Pasta Rau Củ', 
+                    type: 'Pasta', 
+                    importQty: 70, 
+                    exportQty: 65, 
+                    stockQty: 5,
+                    image: 'feane-1.0.0/images/f7.png',
+                    lastImportDate: '09/10/2025',
+                    lastExportDate: '12/10/2025'
+                }
+            ];
+            
+            // Xóa các option hiện tại (trừ option đầu tiên)
+            while (productSelect.options.length > 1) {
+                productSelect.remove(1);
+            }
+            
+            // Thêm các option mới
+            stockItems.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = `${item.id} - ${item.name}`;
+                productSelect.appendChild(option);
+            });
+        }
+        
+        // Hàm thực hiện tra cứu chi tiết
+        function performDetailSearch() {
+            const productId = document.getElementById('detail-product').value;
+            const dateFrom = document.getElementById('detail-date-from').value;
+            const dateTo = document.getElementById('detail-date-to').value;
+            
+            if (!productId) {
+                alert('Vui lòng chọn sản phẩm!');
+                return;
+            }
+            
+            // Dữ liệu mẫu cho giao dịch chi tiết
+            const transactionData = {
+                'SP01': [
+                    { date: '2025-05-01', type: 'import', quantity: 50, unit: 'cái', note: 'Nhập hàng từ NCC A' },
+                    { date: '2025-05-10', type: 'import', quantity: 50, unit: 'cái', note: 'Nhập hàng từ NCC B' },
+                    { date: '2025-05-15', type: 'export', quantity: 30, unit: 'cái', note: 'Bán cho khách hàng X' },
+                    { date: '2025-05-20', type: 'export', quantity: 65, unit: 'cái', note: 'Bán cho khách hàng Y' }
+                ],
+                'SP02': [
+                    { date: '2025-10-01', type: 'import', quantity: 40, unit: 'cái', note: 'Nhập hàng từ NCC C' },
+                    { date: '2025-10-05', type: 'import', quantity: 40, unit: 'cái', note: 'Nhập hàng từ NCC D' },
+                    { date: '2025-10-10', type: 'export', quantity: 25, unit: 'cái', note: 'Bán cho khách hàng Z' },
+                    { date: '2025-10-15', type: 'export', quantity: 35, unit: 'cái', note: 'Bán cho khách hàng W' }
+                ],
+                'SP03': [
+                    { date: '2025-09-01', type: 'import', quantity: 75, unit: 'phần', note: 'Nhập hàng từ NCC E' },
+                    { date: '2025-09-05', type: 'import', quantity: 75, unit: 'phần', note: 'Nhập hàng từ NCC F' },
+                    { date: '2025-09-10', type: 'export', quantity: 70, unit: 'phần', note: 'Bán cho khách hàng V' },
+                    { date: '2025-09-15', type: 'export', quantity: 75, unit: 'phần', note: 'Bán cho khách hàng U' }
+                ]
+            };
+            
+            // Lấy dữ liệu giao dịch cho sản phẩm được chọn
+            const transactions = transactionData[productId] || [];
+            
+            // Lọc theo khoảng thời gian
+            let filteredTransactions = transactions;
+            if (dateFrom || dateTo) {
+                filteredTransactions = transactions.filter(transaction => {
+                    const transactionDate = new Date(transaction.date);
+                    const fromDate = dateFrom ? new Date(dateFrom) : null;
+                    const toDate = dateTo ? new Date(dateTo) : null;
+                    
+                    if (fromDate && toDate) {
+                        return transactionDate >= fromDate && transactionDate <= toDate;
+                    } else if (fromDate) {
+                        return transactionDate >= fromDate;
+                    } else if (toDate) {
+                        return transactionDate <= toDate;
+                    }
+                    return true;
+                });
+            }
+            
+            // Tính tổng nhập, xuất và tồn
+            let totalImport = 0;
+            let totalExport = 0;
+            
+            filteredTransactions.forEach(transaction => {
+                if (transaction.type === 'import') {
+                    totalImport += transaction.quantity;
+                } else if (transaction.type === 'export') {
+                    totalExport += transaction.quantity;
+                }
+            });
+            
+            const totalStock = totalImport - totalExport;
+            
+            // Cập nhật kết quả
+            document.getElementById('total-import').textContent = totalImport;
+            document.getElementById('total-export').textContent = totalExport;
+            document.getElementById('total-stock').textContent = totalStock;
+            
+            // Cập nhật bảng chi tiết
+            const resultBody = document.getElementById('detail-result-body');
+            resultBody.innerHTML = '';
+            
+            if (filteredTransactions.length === 0) {
+                resultBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center py-3">Không có giao dịch nào trong khoảng thời gian này.</td>
+                    </tr>
+                `;
+            } else {
+                filteredTransactions.forEach(transaction => {
+                    const row = document.createElement('tr');
+                    const typeText = transaction.type === 'import' ? 'Nhập hàng' : 'Xuất hàng';
+                    const typeClass = transaction.type === 'import' ? 'text-success' : 'text-danger';
+                    
+                    row.innerHTML = `
+                        <td>${formatDisplayDate(transaction.date)}</td>
+                        <td><span class="${typeClass}">${typeText}</span></td>
+                        <td>${transaction.quantity}</td>
+                        <td>${transaction.unit}</td>
+                        <td>${transaction.note}</td>
+                    `;
+                    resultBody.appendChild(row);
+                });
+            }
+            
+            // Hiển thị kết quả
+            document.getElementById('detail-search-result').style.display = 'block';
+        }
+        
+        // Hàm định dạng ngày hiển thị
+        function formatDisplayDate(dateString) {
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
         }
         
         // Hàm tải dữ liệu tồn kho dựa trên URL parameters
@@ -625,7 +951,7 @@
                     importQty: 120, 
                     exportQty: 115, 
                     stockQty: 5,
-                    image: 'ffeane-1.0.0/images/f7.png',
+                    image: 'feane-1.0.0/images/f7.png',
                     lastImportDate: '13/10/2025',
                     lastExportDate: '14/10/2025'
                 },

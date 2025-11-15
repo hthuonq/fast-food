@@ -362,7 +362,7 @@
                             <div class="card card-custom bg-primary-custom">
                                 <div class="card-body stat-card">
                                     <i class="fas fa-shopping-cart"></i>
-                                    <h3 id="new-orders">12</h3>
+                                    <h3 id="new-orders">15</h3>
                                     <p>Đơn hàng mới</p>
                                 </div>
                             </div>
@@ -373,7 +373,7 @@
                             <div class="card card-custom" style="background-color: #ffc107; color: #212529;">
                                 <div class="card-body stat-card">
                                     <i class="fas fa-cog"></i>
-                                    <h3 id="processing-orders">8</h3>
+                                    <h3 id="processing-orders">12</h3>
                                     <p>Đang xử lý</p>
                                 </div>
                             </div>
@@ -395,7 +395,7 @@
                             <div class="card card-custom" style="background-color: #dc3545; color: white;">
                                 <div class="card-body stat-card">
                                     <i class="fas fa-times-circle"></i>
-                                    <h3 id="cancelled-orders">3</h3>
+                                    <h3 id="cancelled-orders">9</h3>
                                     <p>Đã hủy</p>
                                 </div>
                             </div>
@@ -410,7 +410,7 @@
                         <div class="search-box">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Tìm kiếm đơn hàng..." id="search-order">
-                                <button class="btn btn-outline-secondary" id="search-order-btn">
+                                <button class="btn btn-outline-secondary" type="button" id="search-order-btn">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -434,78 +434,90 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center mt-4" id="pagination-container">
+                                <!-- Phân trang sẽ được tạo động ở đây -->
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 
                 <!-- Best Selling Products -->
                 <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card card-custom">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Sản phẩm bán chạy</h5>
+                    <div class="col-md-4">
+                        <div class="card card-custom">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Sản phẩm bán chạy</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Pizza Hải Sản
+                                        <span class="badge bg-primary rounded-pill">156</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Burger Bò Phô Mai
+                                        <span class="badge bg-primary rounded-pill">142</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Mỳ Ý Sốt Bò Bằm
+                                        <span class="badge bg-primary rounded-pill">128</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Khoai Tây Chiên
+                                        <span class="badge bg-primary rounded-pill">115</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Gà Rán Giòn
+                                        <span class="badge bg-primary rounded-pill">98</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Pizza Hải Sản
-                                <span class="badge bg-primary rounded-pill">156</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Burger Bò Phô Mai
-                                <span class="badge bg-primary rounded-pill">142</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Mỳ Ý Sốt Bò Bằm
-                                <span class="badge bg-primary rounded-pill">128</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Khoai Tây Chiên
-                                <span class="badge bg-primary rounded-pill">115</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Gà Rán Giòn
-                                <span class="badge bg-primary rounded-pill">98</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-                            
-                            <div class="col-md-8">
-                                <div class="card card-custom">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Đơn hàng gần đây</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Mã đơn</th>
-                                                        <th>Khách hàng</th>
-                                                        <th>Ngày đặt</th>
-                                                        <th>Tổng tiền</th>
-                                                        <th>Trạng thái</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="recent-orders-body">
-                                                    <!-- Dữ liệu sẽ được tải động -->
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                    
+                    <div class="col-md-8">
+                        <div class="card card-custom">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Đơn hàng gần đây</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã đơn</th>
+                                                <th>Khách hàng</th>
+                                                <th>Ngày đặt</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Trạng thái</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="recent-orders-body">
+                                            <!-- Dữ liệu sẽ được tải động -->
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script>
+        // Biến toàn cục
+        let currentPage = 1;
+        const itemsPerPage = 5;
+        let filteredOrders = [];
+        let totalPages = 1;
+        let searchTerm = '';
+
         document.addEventListener('DOMContentLoaded', function() {
             // Xử lý toggle sidebar trên mobile
             document.getElementById('toggle-sidebar').addEventListener('click', function() {
@@ -553,14 +565,28 @@
             
             // Xử lý nút tìm kiếm đơn hàng
             document.getElementById('search-order-btn').addEventListener('click', function() {
-                const searchTerm = document.getElementById('search-order').value;
+                searchTerm = document.getElementById('search-order').value;
                 if (searchTerm) {
-                    window.location.href = `orders.html?search=${encodeURIComponent(searchTerm)}`;
+                    // Lọc dữ liệu và cập nhật giao diện
+                    filterOrdersBySearch(searchTerm);
+                } else {
+                    // Nếu không có từ khóa tìm kiếm, hiển thị tất cả đơn hàng
+                    loadOrdersFromURL();
+                }
+            });
+            
+            // Xử lý nhấn Enter trong ô tìm kiếm
+            document.getElementById('search-order').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    document.getElementById('search-order-btn').click();
                 }
             });
             
             // Xử lý nút đặt lại
             document.querySelector('button[type="reset"]').addEventListener('click', function() {
+                searchTerm = '';
+                document.getElementById('search-order').value = '';
                 window.location.href = 'orders.html';
             });
             
@@ -574,22 +600,81 @@
             const status = urlParams.get('status');
             const startDate = urlParams.get('start-date');
             const endDate = urlParams.get('end-date');
-            const searchTerm = urlParams.get('search');
+            searchTerm = urlParams.get('search') || '';
             
-            // Dữ liệu mẫu
+            // Đặt giá trị cho ô tìm kiếm
+            document.getElementById('search-order').value = searchTerm;
+            
+            // Dữ liệu mẫu - đã thêm nhiều đơn hàng mới, đang xử lý và đã hủy
             const orders = [
+                // Đơn hàng mới (15 đơn)
                 { id: 'ORD-001', customer: 'Nguyễn Văn A', date: '15/05/2023', total: '450,000 VNĐ', status: 'new' },
-                { id: 'ORD-002', customer: 'Trần Thị B', date: '14/05/2023', total: '320,000 VNĐ', status: 'processing' },
-                { id: 'ORD-003', customer: 'Lê Văn C', date: '14/05/2023', total: '280,000 VNĐ', status: 'shipped' },
                 { id: 'ORD-004', customer: 'Phạm Thị D', date: '13/05/2023', total: '520,000 VNĐ', status: 'new' },
-                { id: 'ORD-005', customer: 'Hoàng Văn E', date: '12/05/2023', total: '380,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-009', customer: 'Nguyễn Văn I', date: '08/05/2023', total: '550,000 VNĐ', status: 'new' },
+                { id: 'ORD-012', customer: 'Phạm Thị M', date: '05/05/2023', total: '480,000 VNĐ', status: 'new' },
+                { id: 'ORD-016', customer: 'Trần Văn Q', date: '01/05/2023', total: '380,000 VNĐ', status: 'new' },
+                { id: 'ORD-019', customer: 'Lê Thị T', date: '28/04/2023', total: '510,000 VNĐ', status: 'new' },
+                { id: 'ORD-022', customer: 'Hoàng Văn W', date: '25/04/2023', total: '420,000 VNĐ', status: 'new' },
+                { id: 'ORD-025', customer: 'Vũ Thị Z', date: '22/04/2023', total: '590,000 VNĐ', status: 'new' },
+                { id: 'ORD-028', customer: 'Đặng Văn CC', date: '19/04/2023', total: '470,000 VNĐ', status: 'new' },
+                { id: 'ORD-031', customer: 'Bùi Thị FF', date: '16/04/2023', total: '530,000 VNĐ', status: 'new' },
+                { id: 'ORD-034', customer: 'Nguyễn Văn II', date: '13/04/2023', total: '440,000 VNĐ', status: 'new' },
+                { id: 'ORD-037', customer: 'Trần Thị LL', date: '10/04/2023', total: '560,000 VNĐ', status: 'new' },
+                { id: 'ORD-040', customer: 'Lê Văn OO', date: '07/04/2023', total: '490,000 VNĐ', status: 'new' },
+                { id: 'ORD-043', customer: 'Phạm Thị RR', date: '04/04/2023', total: '510,000 VNĐ', status: 'new' },
+                { id: 'ORD-046', customer: 'Hoàng Văn UU', date: '01/04/2023', total: '430,000 VNĐ', status: 'new' },
+                
+                // Đơn hàng đang xử lý (12 đơn)
+                { id: 'ORD-002', customer: 'Trần Thị B', date: '14/05/2023', total: '320,000 VNĐ', status: 'processing' },
+                { id: 'ORD-008', customer: 'Bùi Thị H', date: '09/05/2023', total: '360,000 VNĐ', status: 'processing' },
+                { id: 'ORD-010', customer: 'Trần Thị K', date: '07/05/2023', total: '420,000 VNĐ', status: 'processing' },
+                { id: 'ORD-017', customer: 'Nguyễn Thị R', date: '30/04/2023', total: '390,000 VNĐ', status: 'processing' },
+                { id: 'ORD-020', customer: 'Phạm Văn U', date: '27/04/2023', total: '450,000 VNĐ', status: 'processing' },
+                { id: 'ORD-023', customer: 'Lê Thị X', date: '24/04/2023', total: '370,000 VNĐ', status: 'processing' },
+                { id: 'ORD-026', customer: 'Hoàng Văn AA', date: '21/04/2023', total: '520,000 VNĐ', status: 'processing' },
+                { id: 'ORD-029', customer: 'Vũ Thị DD', date: '18/04/2023', total: '480,000 VNĐ', status: 'processing' },
+                { id: 'ORD-032', customer: 'Đặng Văn GG', date: '15/04/2023', total: '410,000 VNĐ', status: 'processing' },
+                { id: 'ORD-035', customer: 'Bùi Thị JJ', date: '12/04/2023', total: '540,000 VNĐ', status: 'processing' },
+                { id: 'ORD-038', customer: 'Nguyễn Văn MM', date: '09/04/2023', total: '460,000 VNĐ', status: 'processing' },
+                { id: 'ORD-041', customer: 'Trần Thị PP', date: '06/04/2023', total: '390,000 VNĐ', status: 'processing' },
+                
+                // Đơn hàng đã giao (24 đơn)
+                { id: 'ORD-003', customer: 'Lê Văn C', date: '14/05/2023', total: '280,000 VNĐ', status: 'shipped' },
                 { id: 'ORD-006', customer: 'Vũ Thị F', date: '11/05/2023', total: '410,000 VNĐ', status: 'shipped' },
                 { id: 'ORD-007', customer: 'Đặng Văn G', date: '10/05/2023', total: '290,000 VNĐ', status: 'shipped' },
-                { id: 'ORD-008', customer: 'Bùi Thị H', date: '09/05/2023', total: '360,000 VNĐ', status: 'processing' }
+                { id: 'ORD-011', customer: 'Lê Văn L', date: '06/05/2023', total: '310,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-014', customer: 'Vũ Thị O', date: '03/05/2023', total: '440,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-015', customer: 'Đặng Văn P', date: '02/05/2023', total: '300,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-018', customer: 'Hoàng Thị S', date: '29/04/2023', total: '470,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-021', customer: 'Vũ Văn V', date: '26/04/2023', total: '380,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-024', customer: 'Đặng Thị Y', date: '23/04/2023', total: '520,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-027', customer: 'Bùi Văn BB', date: '20/04/2023', total: '450,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-030', customer: 'Nguyễn Thị EE', date: '17/04/2023', total: '390,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-033', customer: 'Trần Văn HH', date: '14/04/2023', total: '540,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-036', customer: 'Lê Thị KK', date: '11/04/2023', total: '420,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-039', customer: 'Phạm Văn NN', date: '08/04/2023', total: '480,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-042', customer: 'Hoàng Thị QQ', date: '05/04/2023', total: '360,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-045', customer: 'Vũ Văn TT', date: '02/04/2023', total: '510,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-048', customer: 'Đặng Thị WW', date: '30/03/2023', total: '440,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-051', customer: 'Bùi Văn ZZ', date: '27/03/2023', total: '370,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-054', customer: 'Nguyễn Thị CCC', date: '24/03/2023', total: '490,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-057', customer: 'Trần Văn FFF', date: '21/03/2023', total: '530,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-060', customer: 'Lê Thị III', date: '18/03/2023', total: '410,000 VNĐ', status: 'shipped' },
+                
+                // Đơn hàng đã hủy (9 đơn)
+                { id: 'ORD-005', customer: 'Hoàng Văn E', date: '12/05/2023', total: '380,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-013', customer: 'Hoàng Văn N', date: '04/05/2023', total: '390,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-044', customer: 'Trần Văn SS', date: '03/04/2023', total: '460,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-047', customer: 'Lê Thị VV', date: '31/03/2023', total: '520,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-050', customer: 'Phạm Văn YY', date: '28/03/2023', total: '380,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-053', customer: 'Hoàng Thị BBB', date: '25/03/2023', total: '450,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-056', customer: 'Vũ Văn EEE', date: '22/03/2023', total: '490,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-059', customer: 'Đặng Thị HHH', date: '19/03/2023', total: '420,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-062', customer: 'Bùi Văn KKK', date: '16/03/2023', total: '540,000 VNĐ', status: 'cancelled' }
             ];
             
             // Lọc dữ liệu dựa trên các tham số
-            let filteredOrders = [...orders];
+            filteredOrders = [...orders];
             
             if (status) {
                 filteredOrders = filteredOrders.filter(order => order.status === status);
@@ -602,22 +687,143 @@
                 );
             }
             
-            // Cập nhật bảng đơn hàng
-            updateOrdersTable(filteredOrders);
+            // Tính toán số trang
+            totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
+            
+            // Đặt lại trang hiện tại về 1 khi lọc
+            currentPage = 1;
+            
+            // Cập nhật bảng đơn hàng và phân trang
+            updateOrdersTable();
+            updatePagination();
             
             // Cập nhật thống kê
-            updateOrderStats(filteredOrders);
+            updateOrderStats();
+            
+            // Cập nhật đơn hàng gần đây (hiển thị tối đa 3 đơn hàng)
+            updateRecentOrders(filteredOrders.slice(0, 3));
+        }
+        
+        // Hàm lọc đơn hàng theo từ khóa tìm kiếm
+        function filterOrdersBySearch(term) {
+            searchTerm = term;
+            
+            // Lọc lại dữ liệu
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const startDate = urlParams.get('start-date');
+            const endDate = urlParams.get('end-date');
+            
+            // Dữ liệu mẫu - đã thêm nhiều đơn hàng mới, đang xử lý và đã hủy
+            const orders = [
+                // Đơn hàng mới (15 đơn)
+                { id: 'ORD-001', customer: 'Nguyễn Văn A', date: '15/05/2023', total: '450,000 VNĐ', status: 'new' },
+                { id: 'ORD-004', customer: 'Phạm Thị D', date: '13/05/2023', total: '520,000 VNĐ', status: 'new' },
+                { id: 'ORD-009', customer: 'Nguyễn Văn I', date: '08/05/2023', total: '550,000 VNĐ', status: 'new' },
+                { id: 'ORD-012', customer: 'Phạm Thị M', date: '05/05/2023', total: '480,000 VNĐ', status: 'new' },
+                { id: 'ORD-016', customer: 'Trần Văn Q', date: '01/05/2023', total: '380,000 VNĐ', status: 'new' },
+                { id: 'ORD-019', customer: 'Lê Thị T', date: '28/04/2023', total: '510,000 VNĐ', status: 'new' },
+                { id: 'ORD-022', customer: 'Hoàng Văn W', date: '25/04/2023', total: '420,000 VNĐ', status: 'new' },
+                { id: 'ORD-025', customer: 'Vũ Thị Z', date: '22/04/2023', total: '590,000 VNĐ', status: 'new' },
+                { id: 'ORD-028', customer: 'Đặng Văn CC', date: '19/04/2023', total: '470,000 VNĐ', status: 'new' },
+                { id: 'ORD-031', customer: 'Bùi Thị FF', date: '16/04/2023', total: '530,000 VNĐ', status: 'new' },
+                { id: 'ORD-034', customer: 'Nguyễn Văn II', date: '13/04/2023', total: '440,000 VNĐ', status: 'new' },
+                { id: 'ORD-037', customer: 'Trần Thị LL', date: '10/04/2023', total: '560,000 VNĐ', status: 'new' },
+                { id: 'ORD-040', customer: 'Lê Văn OO', date: '07/04/2023', total: '490,000 VNĐ', status: 'new' },
+                { id: 'ORD-043', customer: 'Phạm Thị RR', date: '04/04/2023', total: '510,000 VNĐ', status: 'new' },
+                { id: 'ORD-046', customer: 'Hoàng Văn UU', date: '01/04/2023', total: '430,000 VNĐ', status: 'new' },
+                
+                // Đơn hàng đang xử lý (12 đơn)
+                { id: 'ORD-002', customer: 'Trần Thị B', date: '14/05/2023', total: '320,000 VNĐ', status: 'processing' },
+                { id: 'ORD-008', customer: 'Bùi Thị H', date: '09/05/2023', total: '360,000 VNĐ', status: 'processing' },
+                { id: 'ORD-010', customer: 'Trần Thị K', date: '07/05/2023', total: '420,000 VNĐ', status: 'processing' },
+                { id: 'ORD-017', customer: 'Nguyễn Thị R', date: '30/04/2023', total: '390,000 VNĐ', status: 'processing' },
+                { id: 'ORD-020', customer: 'Phạm Văn U', date: '27/04/2023', total: '450,000 VNĐ', status: 'processing' },
+                { id: 'ORD-023', customer: 'Lê Thị X', date: '24/04/2023', total: '370,000 VNĐ', status: 'processing' },
+                { id: 'ORD-026', customer: 'Hoàng Văn AA', date: '21/04/2023', total: '520,000 VNĐ', status: 'processing' },
+                { id: 'ORD-029', customer: 'Vũ Thị DD', date: '18/04/2023', total: '480,000 VNĐ', status: 'processing' },
+                { id: 'ORD-032', customer: 'Đặng Văn GG', date: '15/04/2023', total: '410,000 VNĐ', status: 'processing' },
+                { id: 'ORD-035', customer: 'Bùi Thị JJ', date: '12/04/2023', total: '540,000 VNĐ', status: 'processing' },
+                { id: 'ORD-038', customer: 'Nguyễn Văn MM', date: '09/04/2023', total: '460,000 VNĐ', status: 'processing' },
+                { id: 'ORD-041', customer: 'Trần Thị PP', date: '06/04/2023', total: '390,000 VNĐ', status: 'processing' },
+                
+                // Đơn hàng đã giao (24 đơn)
+                { id: 'ORD-003', customer: 'Lê Văn C', date: '14/05/2023', total: '280,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-006', customer: 'Vũ Thị F', date: '11/05/2023', total: '410,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-007', customer: 'Đặng Văn G', date: '10/05/2023', total: '290,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-011', customer: 'Lê Văn L', date: '06/05/2023', total: '310,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-014', customer: 'Vũ Thị O', date: '03/05/2023', total: '440,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-015', customer: 'Đặng Văn P', date: '02/05/2023', total: '300,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-018', customer: 'Hoàng Thị S', date: '29/04/2023', total: '470,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-021', customer: 'Vũ Văn V', date: '26/04/2023', total: '380,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-024', customer: 'Đặng Thị Y', date: '23/04/2023', total: '520,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-027', customer: 'Bùi Văn BB', date: '20/04/2023', total: '450,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-030', customer: 'Nguyễn Thị EE', date: '17/04/2023', total: '390,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-033', customer: 'Trần Văn HH', date: '14/04/2023', total: '540,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-036', customer: 'Lê Thị KK', date: '11/04/2023', total: '420,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-039', customer: 'Phạm Văn NN', date: '08/04/2023', total: '480,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-042', customer: 'Hoàng Thị QQ', date: '05/04/2023', total: '360,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-045', customer: 'Vũ Văn TT', date: '02/04/2023', total: '510,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-048', customer: 'Đặng Thị WW', date: '30/03/2023', total: '440,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-051', customer: 'Bùi Văn ZZ', date: '27/03/2023', total: '370,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-054', customer: 'Nguyễn Thị CCC', date: '24/03/2023', total: '490,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-057', customer: 'Trần Văn FFF', date: '21/03/2023', total: '530,000 VNĐ', status: 'shipped' },
+                { id: 'ORD-060', customer: 'Lê Thị III', date: '18/03/2023', total: '410,000 VNĐ', status: 'shipped' },
+                
+                // Đơn hàng đã hủy (9 đơn)
+                { id: 'ORD-005', customer: 'Hoàng Văn E', date: '12/05/2023', total: '380,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-013', customer: 'Hoàng Văn N', date: '04/05/2023', total: '390,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-044', customer: 'Trần Văn SS', date: '03/04/2023', total: '460,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-047', customer: 'Lê Thị VV', date: '31/03/2023', total: '520,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-050', customer: 'Phạm Văn YY', date: '28/03/2023', total: '380,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-053', customer: 'Hoàng Thị BBB', date: '25/03/2023', total: '450,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-056', customer: 'Vũ Văn EEE', date: '22/03/2023', total: '490,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-059', customer: 'Đặng Thị HHH', date: '19/03/2023', total: '420,000 VNĐ', status: 'cancelled' },
+                { id: 'ORD-062', customer: 'Bùi Văn KKK', date: '16/03/2023', total: '540,000 VNĐ', status: 'cancelled' }
+            ];
+            
+            // Lọc dữ liệu dựa trên các tham số
+            filteredOrders = [...orders];
+            
+            if (status) {
+                filteredOrders = filteredOrders.filter(order => order.status === status);
+            }
+            
+            if (searchTerm) {
+                filteredOrders = filteredOrders.filter(order => 
+                    order.id.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                    order.customer.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+            
+            // Tính toán số trang
+            totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
+            
+            // Đặt lại trang hiện tại về 1 khi lọc
+            currentPage = 1;
+            
+            // Cập nhật bảng đơn hàng và phân trang
+            updateOrdersTable();
+            updatePagination();
+            
+            // Cập nhật thống kê
+            updateOrderStats();
             
             // Cập nhật đơn hàng gần đây (hiển thị tối đa 3 đơn hàng)
             updateRecentOrders(filteredOrders.slice(0, 3));
         }
         
         // Hàm cập nhật bảng đơn hàng
-        function updateOrdersTable(orders) {
+        function updateOrdersTable() {
             const tableBody = document.getElementById('orders-table-body');
             tableBody.innerHTML = '';
             
-            if (orders.length === 0) {
+            // Tính toán dữ liệu cho trang hiện tại
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const currentOrders = filteredOrders.slice(startIndex, endIndex);
+            
+            if (currentOrders.length === 0) {
                 tableBody.innerHTML = `
                     <tr>
                         <td colspan="6" class="text-center py-4">
@@ -629,7 +835,7 @@
                 return;
             }
             
-            orders.forEach(order => {
+            currentOrders.forEach(order => {
                 const statusText = getStatusText(order.status);
                 const statusClass = `badge badge-status-${order.status}`;
                 
@@ -650,12 +856,64 @@
             });
         }
         
+        // Hàm cập nhật phân trang
+        function updatePagination() {
+            const paginationContainer = document.getElementById('pagination-container');
+            paginationContainer.innerHTML = '';
+            
+            if (totalPages <= 1) {
+                return;
+            }
+            
+            // Tạo nút "Trước"
+            const prevLi = document.createElement('li');
+            prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevLi.innerHTML = `<a class="page-link" href="#" data-page="${currentPage - 1}">Trước</a>`;
+            paginationContainer.appendChild(prevLi);
+            
+            // Tạo các nút trang
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            // Điều chỉnh startPage nếu endPage đạt tới totalPages
+            if (endPage - startPage + 1 < maxVisiblePages && startPage > 1) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageLi = document.createElement('li');
+                pageLi.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageLi.innerHTML = `<a class="page-link" href="#" data-page="${i}">${i}</a>`;
+                paginationContainer.appendChild(pageLi);
+            }
+            
+            // Tạo nút "Tiếp"
+            const nextLi = document.createElement('li');
+            nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextLi.innerHTML = `<a class="page-link" href="#" data-page="${currentPage + 1}">Tiếp</a>`;
+            paginationContainer.appendChild(nextLi);
+            
+            // Thêm sự kiện click cho các nút phân trang
+            paginationContainer.querySelectorAll('.page-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = parseInt(this.getAttribute('data-page'));
+                    if (page >= 1 && page <= totalPages && page !== currentPage) {
+                        currentPage = page;
+                        updateOrdersTable();
+                        updatePagination();
+                    }
+                });
+            });
+        }
+        
         // Hàm cập nhật thống kê đơn hàng
-        function updateOrderStats(orders) {
-            const newOrders = orders.filter(order => order.status === 'new').length;
-            const processingOrders = orders.filter(order => order.status === 'processing').length;
-            const shippedOrders = orders.filter(order => order.status === 'shipped').length;
-            const cancelledOrders = orders.filter(order => order.status === 'cancelled').length;
+        function updateOrderStats() {
+            const newOrders = filteredOrders.filter(order => order.status === 'new').length;
+            const processingOrders = filteredOrders.filter(order => order.status === 'processing').length;
+            const shippedOrders = filteredOrders.filter(order => order.status === 'shipped').length;
+            const cancelledOrders = filteredOrders.filter(order => order.status === 'cancelled').length;
             
             document.getElementById('new-orders').textContent = newOrders;
             document.getElementById('processing-orders').textContent = processingOrders;
