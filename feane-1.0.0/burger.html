@@ -30,6 +30,44 @@
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
+  <style>
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    
+    .pagination {
+      display: flex;
+      list-style: none;
+      padding: 0;
+    }
+    
+    .pagination li {
+      margin: 0 5px;
+    }
+    
+    .pagination a {
+      display: block;
+      padding: 8px 15px;
+      border: 1px solid #ffbe33;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #ffbe33;
+      transition: all 0.3s;
+    }
+    
+    .pagination a:hover,
+    .pagination a.active {
+      background-color: #ffbe33;
+      color: white;
+    }
+    
+    .pagination a.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  </style>
 </head>
 
 <body class="sub_page">
@@ -162,245 +200,18 @@
 </ul>
 
       <div class="filters-content">
-        <div class="row grid">
-          
-          <div class="col-sm-6 col-lg-4 all burger">
-            <div class="box">
-              <div>
-                <a href="detailedinformationindex.html">
-                <div class="img-box">
-                  <img src="images/f2.png" alt="">
-                </div>
-                </a>
-                <div class="detail-box">
-                  <h5>
-                    Burger bò
-                  </h5>
-                  <p>
-                    Thịt bò nướng đậm vị, kèm rau tươi và sốt đặc trưng, tạo hương vị thơm ngon khó cưỡng.
-                  <div class="options">
-                    <h6>
-                      50,000đ
-                    </h6>
-                    <a href="userlogin.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          
-          
-          <div class="col-sm-6 col-lg-4 all burger">
-            <div class="box">
-              <div>
-                <a href="detailedinformationindex.html">
-                <div class="img-box">
-                  <img src="images/f7.png" alt="">
-                </div>
-                </a>
-                <div class="detail-box">
-                  <h5>
-                    Burger gà chiên
-                  </h5>
-                  <p>
-                   Miếng gà chiên vàng giòn, kèm rau tươi và sốt bơ béo ngậy, hương vị thơm ngon khó cưỡng.
-                  </p>
-                  <div class="options">
-                    <h6>
-                      50,000đ
-                    </h6>
-                    <a href="userlogin.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all burger">
-            <div class="box">
-              <div>
-                <a href="detailedinformationindex.html">
-                <div class="img-box">
-                  <img src="images/f8.png" alt="">
-                </div>
-                </a></a>
-                <div class="detail-box">
-                  <h5>
-                    Burger ức gà
-                  </h5>
-                  <p>
-                    Phần thịt ức gà mềm, kết hợp rau tươi và sốt đặc biệt, mang vị thanh nhẹ nhưng đậm đà hấp dẫn.
-                  </p>
-                  <div class="options">
-                    <h6>
-                      50,000đ
-                    </h6>
-                    <a href="userlogin.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+        <div class="row grid" id="menu-items-container">
+          <!-- Menu items will be dynamically loaded here -->
+        </div>
+      </div>
+      
+      <!-- Pagination controls -->
+      <div class="pagination-container">
+        <ul class="pagination" id="pagination">
+          <!-- Pagination buttons will be dynamically generated here -->
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- end food section -->
@@ -507,6 +318,224 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
+
+  <script>
+    // Burger items data
+    const burgerItems = [
+      {
+        id: 2,
+        name: "Burger bò",
+        description: "Thịt bò nướng đậm vị, kèm rau tươi và sốt đặc trưng, tạo hương vị thơm ngon khó cưỡng.",
+        price: "50,000đ",
+        image: "images/f2.png",
+        category: "burger"
+      },
+      {
+        id: 7,
+        name: "Burger gà chiên",
+        description: "Miếng gà chiên vàng giòn, kèm rau tươi và sốt bơ béo ngậy, hương vị thơm ngon khó cưỡng.",
+        price: "50,000đ",
+        image: "images/f7.png",
+        category: "burger"
+      },
+      {
+        id: 8,
+        name: "Burger ức gà",
+        description: "Phần thịt ức gà mềm, kết hợp rau tươi và sốt đặc biệt, mang vị thanh nhẹ nhưng đậm đà hấp dẫn.",
+        price: "50,000đ",
+        image: "images/f8.png",
+        category: "burger"
+      },
+      // Thêm các burger items khác nếu có
+      {
+        id: 10,
+        name: "Burger phô mai",
+        description: "Burger với lớp phô mai tan chảy, thịt bò nướng thơm và rau tươi, hương vị béo ngậy khó cưỡng.",
+        price: "55,000đ",
+        image: "images/f2.png", // Thay bằng ảnh thực tế
+        category: "burger"
+      },
+      {
+        id: 11,
+        name: "Burger cá hồi",
+        description: "Phi lê cá hồi tươi ngon, kết hợp sốt đặc biệt và rau xanh, mang hương vị độc đáo và thanh nhẹ.",
+        price: "65,000đ",
+        image: "images/f7.png", // Thay bằng ảnh thực tế
+        category: "burger"
+      },
+      {
+        id: 12,
+        name: "Burger thập cẩm",
+        description: "Sự kết hợp hoàn hảo của nhiều loại thịt và rau củ, tạo nên hương vị đa dạng và hấp dẫn.",
+        price: "70,000đ",
+        image: "images/f8.png", // Thay bằng ảnh thực tế
+        category: "burger"
+      }
+    ];
+
+    // Pagination variables
+    const itemsPerPage = 3; // Hiển thị 3 burger mỗi trang
+    let currentPage = 1;
+
+    // Initialize the menu
+    document.addEventListener('DOMContentLoaded', function() {
+      displayMenuItems(currentPage);
+      setupPagination();
+    });
+
+    // Function to display menu items based on page
+    function displayMenuItems(page) {
+      const container = document.getElementById('menu-items-container');
+      container.innerHTML = '';
+      
+      // Calculate start and end index for current page
+      const startIndex = (page - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const paginatedItems = burgerItems.slice(startIndex, endIndex);
+      
+      // Generate HTML for each menu item
+      paginatedItems.forEach(item => {
+        const itemHTML = `
+          <div class="col-sm-6 col-lg-4 all ${item.category}">
+            <div class="box">
+              <div>
+                <a href="detailedinformationindex.html">
+                  <div class="img-box">
+                    <img src="${item.image}" alt="${item.name}">
+                  </div>
+                </a>
+                <div class="detail-box">
+                  <h5>${item.name}</h5>
+                  <p>${item.description}</p>
+                  <div class="options">
+                    <h6>${item.price}</h6>
+                    <a href="userlogin.html">
+                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
+                        <g>
+                          <g>
+                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
+                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+                          </g>
+                        </g>
+                        <g>
+                          <g>
+                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
+                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
+                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
+                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
+                          </g>
+                        </g>
+                        <g>
+                          <g>
+                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
+                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
+                          </g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        container.innerHTML += itemHTML;
+      });
+      
+      // Reinitialize Isotope after updating content
+      if (typeof initIsotope === 'function') {
+        initIsotope();
+      }
+    }
+
+    // Function to setup pagination controls
+    function setupPagination() {
+      const paginationContainer = document.getElementById('pagination');
+      paginationContainer.innerHTML = '';
+      
+      // Calculate total pages
+      const totalPages = Math.ceil(burgerItems.length / itemsPerPage);
+      
+      // Only show pagination if there's more than one page
+      if (totalPages > 1) {
+        // Previous button
+        const prevButton = document.createElement('li');
+        prevButton.innerHTML = `<a href="#" class="${currentPage === 1 ? 'disabled' : ''}" id="prev-page">«</a>`;
+        paginationContainer.appendChild(prevButton);
+        
+        // Page number buttons
+        for (let i = 1; i <= totalPages; i++) {
+          const pageButton = document.createElement('li');
+          pageButton.innerHTML = `<a href="#" class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a>`;
+          paginationContainer.appendChild(pageButton);
+        }
+        
+        // Next button
+        const nextButton = document.createElement('li');
+        nextButton.innerHTML = `<a href="#" class="${currentPage === totalPages ? 'disabled' : ''}" id="next-page">»</a>`;
+        paginationContainer.appendChild(nextButton);
+        
+        // Add event listeners
+        document.getElementById('prev-page').addEventListener('click', function(e) {
+          e.preventDefault();
+          if (currentPage > 1) {
+            currentPage--;
+            displayMenuItems(currentPage);
+            setupPagination();
+          }
+        });
+        
+        document.getElementById('next-page').addEventListener('click', function(e) {
+          e.preventDefault();
+          if (currentPage < totalPages) {
+            currentPage++;
+            displayMenuItems(currentPage);
+            setupPagination();
+          }
+        });
+        
+        const pageButtons = document.querySelectorAll('#pagination a[data-page]');
+        pageButtons.forEach(button => {
+          button.addEventListener('click', function(e) {
+            e.preventDefault();
+            currentPage = parseInt(this.getAttribute('data-page'));
+            displayMenuItems(currentPage);
+            setupPagination();
+          });
+        });
+      }
+    }
+  </script>
 
 </body>
 

@@ -89,6 +89,95 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
+    /* Modal styles */
+    .filter-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .filter-modal-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .filter-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #222;
+    }
+    
+    .filter-group {
+      margin-bottom: 20px;
+    }
+    
+    .filter-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .filter-input, .filter-select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    .price-range {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .price-range input {
+      flex: 1;
+    }
+    
+    .filter-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+    }
+    
+    .filter-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-reset {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    
+    .filter-apply {
+      background-color: #ffbe33;
+      color: white;
+    }
+    
+    .filter-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
     @media (max-width: 768px) {
       .search-form {
         flex-direction: column;
@@ -226,11 +315,58 @@
       <form class="search-form" action="search.html" method="GET">
         <input type="text" class="search-input" name="q" placeholder="Nhập tên món ăn bạn muốn tìm...">
         <a href="searchresults.html" class="search-button">Tìm kiếm</a>
-        <a href="findproductpro.html" class="search-button">Tìm kiếm nâng cao</a>
+        <button type="button" id="filterBtn" class="search-button">Tìm kiếm nâng cao</button>
       </form>
-      
     </div>
   </section>
+
+  <!-- Modal Lọc -->
+  <div id="filterModal" class="filter-modal">
+    <div class="filter-modal-content">
+      <h2 class="filter-title">Tìm kiếm nâng cao</h2>
+      <form id="filterForm" action="searchresults.html" method="GET">
+        <div class="filter-group">
+          <label class="filter-label" for="keyword">Từ khóa:</label>
+          <input type="text" id="keyword" name="q" class="filter-input" placeholder="Nhập từ khóa tìm kiếm...">
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label" for="category">Danh mục:</label>
+          <select id="category" name="category" class="filter-select">
+            <option value="all">Tất cả</option>
+            <option value="pizza">Pizza</option>
+            <option value="burger">Burger</option>
+            <option value="pasta">Pasta</option>
+            <option value="fries">Fries</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">Khoảng giá:</label>
+          <div class="price-range">
+            <input type="number" id="priceFrom" name="priceFrom" class="filter-input" placeholder="Từ (VND)">
+            <input type="number" id="priceTo" name="priceTo" class="filter-input" placeholder="Đến (VND)">
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label" for="sortBy">Sắp xếp theo:</label>
+          <select id="sortBy" name="sortBy" class="filter-select">
+            <option value="default">Mặc định</option>
+            <option value="price_asc">Giá tăng dần</option>
+            <option value="price_desc">Giá giảm dần</option>
+            <option value="name_asc">Tên A-Z</option>
+            <option value="name_desc">Tên Z-A</option>
+          </select>
+        </div>
+        
+        <div class="filter-actions">
+          <button type="button" id="resetBtn" class="filter-btn filter-reset">Đặt lại</button>
+           <a href="searchresults.html" class="search-button">Tìm kiếm</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- food section -->
   <section class="food_section layout_padding">
@@ -561,6 +697,38 @@
     </div>
   </footer>
   
+  <!-- JavaScript để xử lý modal -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterBtn = document.getElementById('filterBtn');
+      const filterModal = document.getElementById('filterModal');
+      const resetBtn = document.getElementById('resetBtn');
+      const filterForm = document.getElementById('filterForm');
+      
+      // Mở modal khi nhấn nút Lọc
+      filterBtn.addEventListener('click', function() {
+        filterModal.style.display = 'flex';
+      });
+      
+      // Đóng modal khi nhấn bên ngoài nội dung modal
+      filterModal.addEventListener('click', function(e) {
+        if (e.target === filterModal) {
+          filterModal.style.display = 'none';
+        }
+      });
+      
+      // Reset form khi nhấn nút Đặt lại
+      resetBtn.addEventListener('click', function() {
+        filterForm.reset();
+      });
+      
+      // Xử lý khi submit form
+      filterForm.addEventListener('submit', function(e) {
+        // Form sẽ tự động chuyển hướng đến searchresults.html
+        // với các tham số tìm kiếm từ form
+      });
+    });
+  </script>
 </body>
 
 </html>
