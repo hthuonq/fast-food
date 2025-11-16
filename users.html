@@ -375,22 +375,22 @@
             <div class="stats-container">
                 <div class="stat-card">
                     <i class="fas fa-users text-primary"></i>
-                    <h3>156</h3>
+                    <h3 id="totalUsers">156</h3>
                     <p>Tổng số người dùng</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-user-plus text-success"></i>
-                    <h3>24</h3>
+                    <h3 id="newUsers">24</h3>
                     <p>Người dùng mới (tháng)</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-user-lock text-danger"></i>
-                    <h3>5</h3>
+                    <h3 id="lockedUsers">5</h3>
                     <p>Tài khoản bị khóa</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-chart-line text-warning"></i>
-                    <h3>96%</h3>
+                    <h3 id="activeRate">96%</h3>
                     <p>Tỷ lệ hoạt động</p>
                 </div>
             </div>
@@ -417,9 +417,9 @@
                         </select>
                     </div>
                     <div class="filter-actions">
-                        <a href="usersfind.html" class="btn btn-custom" id="searchButton">
+                        <button type="button" class="btn btn-custom" id="searchButton">
                             <i class="fas fa-search me-2"></i>Tìm kiếm
-                        </a>
+                        </button>
                         <button type="button" class="btn btn-reset" id="resetButton">
                             <i class="fas fa-redo me-2"></i>Đặt lại
                         </button>
@@ -446,168 +446,16 @@
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#001</td>
-                                    <td>
-                                        <div class="user-info-row">
-                                            <div class="user-avatar">NA</div>
-                                            <div>
-                                                <div class="fw-bold">Nguyễn Văn A</div>
-                                                <small class="text-muted">@nguyenvana</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>nguyenvana@example.com</td>
-                                    <td>0123 456 789</td>
-                                    <td>15/05/2023</td>
-                                    <td>
-                                        <span class="status-badge status-active">Đang hoạt động</span>
-                                    </td>
-                                    <td class="action-buttons">
-                                        <a href="usersfix.html" class="btn btn-sm btn-info">
-                                            <i class="fas fa-edit"></i> Sửa
-                                        </a>
-                                        <a href="resetPassword.html" class="btn btn-sm btn-custom">
-                                            <i class="fas fa-key"></i> Reset MK
-                                        </a>
-                                        <a href="lockUsers.html" class="btn btn-sm btn-warning">
-                                            <i class="fas fa-lock"></i> Khoá
-                                        </a>    
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#002</td>
-                                    <td>
-                                        <div class="user-info-row">
-                                            <div class="user-avatar">TB</div>
-                                            <div>
-                                                <div class="fw-bold">Trần Thị B</div>
-                                                <small class="text-muted">@tranthib</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>tranthib@example.com</td>
-                                    <td>0987 654 321</td>
-                                    <td>22/06/2023</td>
-                                    <td>
-                                        <span class="status-badge status-active">Đang hoạt động</span>
-                                    </td>
-                                    <td class="action-buttons">
-                                        <a href="usersfix.html" class="btn btn-sm btn-info">
-                                            <i class="fas fa-edit"></i> Sửa
-                                        </a>
-                                        <a href="resetPassword.html" class="btn btn-sm btn-custom">
-                                            <i class="fas fa-key"></i> Reset MK
-                                        </a>
-                                        <a href="lockUsers.html" class="btn btn-sm btn-warning">
-                                            <i class ="fas fa-lock"></i> Khoá
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#003</td>
-                                    <td>
-                                        <div class="user-info-row">
-                                            <div class="user-avatar">LC</div>
-                                            <div>
-                                                <div class="fw-bold">Lê Văn C</div>
-                                                <small class="text-muted">@levanc</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>levanc@example.com</td>
-                                    <td>0369 852 147</td>
-                                    <td>10/07/2023</td>
-                                    <td>
-                                        <span class="status-badge status-locked">Đã khóa</span>
-                                    </td>
-                                    <td class="action-buttons">
-                                        <a href="usersfix.html" class="btn btn-sm btn-info">
-                                            <i class="fas fa-edit"></i> Sửa
-                                        </a>
-                                        <a href="resetPassword.html" class="btn btn-sm btn-custom">
-                                            <i class="fas fa-key"></i> Reset MK
-                                        </a>
-                                        <a href="unlockUsers.html" class="btn btn-sm btn-warning">
-                                            <i class ="fas fa-unlock"></i> Mở Khoá
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#004</td>
-                                    <td>
-                                        <div class="user-info-row">
-                                            <div class="user-avatar">PD</div>
-                                            <div>
-                                                <div class="fw-bold">Phạm Thị D</div>
-                                                <small class="text-muted">@phamthid</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>phamthid@example.com</td>
-                                    <td>0912 345 678</td>
-                                    <td>05/08/2023</td>
-                                    <td>
-                                        <span class="status-badge status-active">Đang hoạt động</span>
-                                    </td>
-                                    <td class="action-buttons">
-                                        <a href="usersfix.html" class="btn btn-sm btn-info">
-                                            <i class="fas fa-edit"></i> Sửa
-                                        </a>
-                                        <a href="resetPassword.html" class="btn btn-sm btn-custom">
-                                            <i class="fas fa-key"></i> Reset MK
-                                        </a>
-                                        <a href="lockUsers.html" class="btn btn-sm btn-warning">
-                                            <i class ="fas fa-lock"></i> Khoá
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#005</td>
-                                    <td>
-                                        <div class="user-info-row">
-                                            <div class="user-avatar">HE</div>
-                                            <div>
-                                                <div class="fw-bold">Hoàng Văn E</div>
-                                                <small class="text-muted">@hoangvane</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>hoangvane@example.com</td>
-                                    <td>0945 678 123</td>
-                                    <td>18/09/2023</td>
-                                    <td>
-                                        <span class="status-badge status-active">Đang hoạt động</span>
-                                    </td>
-                                    <td class="action-buttons">
-                                        <a href="usersfix.html" class="btn btn-sm btn-info">
-                                            <i class="fas fa-edit"></i> Sửa
-                                        </a>
-                                        <a href="resetPassword.html" class="btn btn-sm btn-custom">
-                                            <i class="fas fa-key"></i> Reset MK
-                                        </a>
-                                        <a href="lockUsers.html" class="btn btn-sm btn-warning">
-                                            <i class ="fas fa-lock"></i> Khoá
-                                        </a>
-                                    </td>
-                                </tr>
+                            <tbody id="userTableBody">
+                                <!-- Dữ liệu người dùng sẽ được tạo động bằng JavaScript -->
                             </tbody>
                         </table>
                     </div>
                     
                     <!-- Pagination -->
                     <nav aria-label="Page navigation" class="mt-4">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="users.html" tabindex="-1">Trước</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="users.html">1</a></li>
-                            <li class="page-item"><a class="page-link" href="userspage2.html">2</a></li>
-                            <li class="page-item"><a class="page-link" href="userspage3.html">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="userspage2.html">Tiếp</a>
-                            </li>
+                        <ul class="pagination justify-content-center" id="paginationContainer">
+                            <!-- Phân trang sẽ được tạo động bằng JavaScript -->
                         </ul>
                     </nav>
                 </div>
@@ -620,70 +468,328 @@
     
     <!-- Custom JavaScript -->
     <script>
+        // Dữ liệu người dùng mẫu
+        const users = [
+            {
+                id: "#001",
+                name: "Nguyễn Văn A",
+                username: "@nguyenvana",
+                email: "nguyenvana@example.com",
+                phone: "0123 456 789",
+                registerDate: "15/05/2023",
+                status: "active"
+            },
+            {
+                id: "#002",
+                name: "Trần Thị B",
+                username: "@tranthib",
+                email: "tranthib@example.com",
+                phone: "0987 654 321",
+                registerDate: "22/06/2023",
+                status: "active"
+            },
+            {
+                id: "#003",
+                name: "Lê Văn C",
+                username: "@levanc",
+                email: "levanc@example.com",
+                phone: "0369 852 147",
+                registerDate: "10/07/2023",
+                status: "locked"
+            },
+            {
+                id: "#004",
+                name: "Phạm Thị D",
+                username: "@phamthid",
+                email: "phamthid@example.com",
+                phone: "0912 345 678",
+                registerDate: "05/08/2023",
+                status: "active"
+            },
+            {
+                id: "#005",
+                name: "Hoàng Văn E",
+                username: "@hoangvane",
+                email: "hoangvane@example.com",
+                phone: "0945 678 123",
+                registerDate: "18/09/2023",
+                status: "active"
+            },
+            {
+                id: "#006",
+                name: "Vũ Thị F",
+                username: "@vuthif",
+                email: "vuthif@example.com",
+                phone: "0978 123 456",
+                registerDate: "25/10/2023",
+                status: "active"
+            },
+            {
+                id: "#007",
+                name: "Đặng Văn G",
+                username: "@dangvang",
+                email: "dangvang@example.com",
+                phone: "0932 654 987",
+                registerDate: "12/11/2023",
+                status: "locked"
+            },
+            {
+                id: "#008",
+                name: "Bùi Thị H",
+                username: "@buithih",
+                email: "buithih@example.com",
+                phone: "0965 321 789",
+                registerDate: "30/11/2023",
+                status: "active"
+            },
+            {
+                id: "#009",
+                name: "Ngô Văn I",
+                username: "@ngovani",
+                email: "ngovani@example.com",
+                phone: "0989 456 123",
+                registerDate: "05/12/2023",
+                status: "active"
+            },
+            {
+                id: "#010",
+                name: "Đỗ Thị K",
+                username: "@dothik",
+                email: "dothik@example.com",
+                phone: "0911 222 333",
+                registerDate: "15/12/2023",
+                status: "active"
+            },
+            {
+                id: "#011",
+                name: "Lý Văn L",
+                username: "@lyvanl",
+                email: "lyvanl@example.com",
+                phone: "0933 444 555",
+                registerDate: "20/12/2023",
+                status: "active"
+            },
+            {
+                id: "#012",
+                name: "Trịnh Thị M",
+                username: "@trinhthim",
+                email: "trinhthim@example.com",
+                phone: "0977 888 999",
+                registerDate: "25/12/2023",
+                status: "locked"
+            }
+        ];
+
+        // Biến toàn cục
+        let currentPage = 1;
+        const itemsPerPage = 5;
+        let filteredUsers = [...users];
+
+        // Hàm cập nhật thống kê
+        function updateStats() {
+            const totalUsers = filteredUsers.length;
+            const lockedUsers = filteredUsers.filter(user => user.status === 'locked').length;
+            const activeUsers = totalUsers - lockedUsers;
+            const activeRate = totalUsers > 0 ? Math.round((activeUsers / totalUsers) * 100) : 0;
+            
+            // Giả sử có 24 người dùng mới trong tháng (có thể thay đổi logic này)
+            const newUsers = 24;
+            
+            document.getElementById('totalUsers').textContent = totalUsers;
+            document.getElementById('lockedUsers').textContent = lockedUsers;
+            document.getElementById('activeRate').textContent = activeRate + '%';
+            document.getElementById('newUsers').textContent = newUsers;
+        }
+
+        // Hàm hiển thị người dùng theo trang
+        function displayUsers(page = 1) {
+            const tableBody = document.getElementById('userTableBody');
+            tableBody.innerHTML = '';
+            
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const usersToShow = filteredUsers.slice(startIndex, endIndex);
+            
+            usersToShow.forEach(user => {
+                const row = document.createElement('tr');
+                
+                // Tạo avatar từ tên
+                const nameParts = user.name.split(' ');
+                const avatarText = nameParts.length > 1 
+                    ? nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0)
+                    : nameParts[0].substring(0, 2);
+                
+                // Xác định nút khóa/mở khóa dựa trên trạng thái
+                const lockButton = user.status === 'active' 
+                    ? `<button class="btn btn-sm btn-warning lock-btn" data-user-id="${user.id}">
+                          <i class="fas fa-lock"></i> Khoá
+                       </button>`
+                    : `<button class="btn btn-sm btn-warning unlock-btn" data-user-id="${user.id}">
+                          <i class="fas fa-unlock"></i> Mở Khoá
+                       </button>`;
+                
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>
+                        <div class="user-info-row">
+                            <div class="user-avatar">${avatarText}</div>
+                            <div>
+                                <div class="fw-bold">${user.name}</div>
+                                <small class="text-muted">${user.username}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${user.email}</td>
+                    <td>${user.phone}</td>
+                    <td>${user.registerDate}</td>
+                    <td>
+                        <span class="status-badge ${user.status === 'active' ? 'status-active' : 'status-locked'}">
+                            ${user.status === 'active' ? 'Đang hoạt động' : 'Đã khóa'}
+                        </span>
+                    </td>
+                    <td class="action-buttons">
+                        <a href="usersfix.html" class="btn btn-sm btn-info">
+                            <i class="fas fa-edit"></i> Sửa
+                        </a>
+                        ${lockButton}
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Thêm sự kiện cho các nút khóa/mở khóa
+            document.querySelectorAll('.lock-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.getAttribute('data-user-id');
+                    lockUser(userId);
+                });
+            });
+            
+            document.querySelectorAll('.unlock-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.getAttribute('data-user-id');
+                    unlockUser(userId);
+                });
+            });
+            
+            // Cập nhật phân trang
+            updatePagination();
+            
+            // Cập nhật thống kê
+            updateStats();
+        }
+
+        // Hàm cập nhật phân trang
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+            const paginationContainer = document.getElementById('paginationContainer');
+            paginationContainer.innerHTML = '';
+            
+            // Nút "Trước"
+            const prevLi = document.createElement('li');
+            prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevLi.innerHTML = `<a class="page-link" href="#" data-page="${currentPage - 1}">Trước</a>`;
+            paginationContainer.appendChild(prevLi);
+            
+            // Các nút số trang
+            for (let i = 1; i <= totalPages; i++) {
+                const pageLi = document.createElement('li');
+                pageLi.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageLi.innerHTML = `<a class="page-link" href="#" data-page="${i}">${i}</a>`;
+                paginationContainer.appendChild(pageLi);
+            }
+            
+            // Nút "Tiếp"
+            const nextLi = document.createElement('li');
+            nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextLi.innerHTML = `<a class="page-link" href="#" data-page="${currentPage + 1}">Tiếp</a>`;
+            paginationContainer.appendChild(nextLi);
+            
+            // Thêm sự kiện click cho các nút phân trang
+            document.querySelectorAll('#paginationContainer .page-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = parseInt(this.getAttribute('data-page'));
+                    if (page && page !== currentPage) {
+                        currentPage = page;
+                        displayUsers(currentPage);
+                    }
+                });
+            });
+        }
+
+        // Hàm khóa người dùng
+        function lockUser(userId) {
+            const userIndex = users.findIndex(user => user.id === userId);
+            if (userIndex !== -1) {
+                users[userIndex].status = 'locked';
+                // Cập nhật filteredUsers nếu cần
+                const filteredIndex = filteredUsers.findIndex(user => user.id === userId);
+                if (filteredIndex !== -1) {
+                    filteredUsers[filteredIndex].status = 'locked';
+                }
+                displayUsers(currentPage);
+            }
+        }
+
+        // Hàm mở khóa người dùng
+        function unlockUser(userId) {
+            const userIndex = users.findIndex(user => user.id === userId);
+            if (userIndex !== -1) {
+                users[userIndex].status = 'active';
+                // Cập nhật filteredUsers nếu cần
+                const filteredIndex = filteredUsers.findIndex(user => user.id === userId);
+                if (filteredIndex !== -1) {
+                    filteredUsers[filteredIndex].status = 'active';
+                }
+                displayUsers(currentPage);
+            }
+        }
+
         // Function to filter users based on search criteria
         function filterUsers() {
             const nameFilter = document.getElementById('searchName').value.toLowerCase();
             const dateFromFilter = document.getElementById('searchDateFrom').value;
-            const dateToFilter = document.getElementById('searchDateTo').value;
             const statusFilter = document.getElementById('searchStatus').value;
             
-            const rows = document.querySelectorAll('tbody tr');
-            
-            rows.forEach(row => {
-                const name = row.cells[1].textContent.toLowerCase();
-                const date = row.cells[4].textContent;
-                const status = row.cells[5].textContent;
+            filteredUsers = users.filter(user => {
+                const nameMatch = !nameFilter || 
+                    user.name.toLowerCase().includes(nameFilter) || 
+                    user.username.toLowerCase().includes(nameFilter);
                 
                 // Convert date from DD/MM/YYYY to YYYY-MM-DD for comparison
-                const dateParts = date.split('/');
+                const dateParts = user.registerDate.split('/');
                 const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+                const dateMatch = !dateFromFilter || formattedDate >= dateFromFilter;
                 
-                let showRow = true;
+                const statusMatch = !statusFilter || 
+                    (statusFilter === 'active' && user.status === 'active') ||
+                    (statusFilter === 'locked' && user.status === 'locked');
                 
-                // Filter by name
-                if (nameFilter && !name.includes(nameFilter)) {
-                    showRow = false;
-                }
-                
-                // Filter by date range
-                if (dateFromFilter && formattedDate < dateFromFilter) {
-                    showRow = false;
-                }
-                
-                if (dateToFilter && formattedDate > dateToFilter) {
-                    showRow = false;
-                }
-                
-                // Filter by status
-                if (statusFilter) {
-                    if (statusFilter === 'active' && !status.includes('Đang hoạt động')) {
-                        showRow = false;
-                    } else if (statusFilter === 'locked' && !status.includes('Đã khóa')) {
-                        showRow = false;
-                    }
-                }
-                
-                // Show or hide the row based on filters
-                row.style.display = showRow ? '' : 'none';
+                return nameMatch && dateMatch && statusMatch;
             });
+            
+            currentPage = 1;
+            displayUsers(currentPage);
         }
         
         // Function to reset all filters
         function resetFilters() {
             document.getElementById('searchName').value = '';
             document.getElementById('searchDateFrom').value = '';
-            document.getElementById('searchDateTo').value = '';
             document.getElementById('searchStatus').value = '';
             
-            // Show all rows
-            const rows = document.querySelectorAll('tbody tr');
-            rows.forEach(row => {
-                row.style.display = '';
-            });
+            filteredUsers = [...users];
+            currentPage = 1;
+            displayUsers(currentPage);
         }
         
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
+            // Hiển thị người dùng ban đầu
+            displayUsers(currentPage);
+            
             document.getElementById('searchButton').addEventListener('click', filterUsers);
             document.getElementById('resetButton').addEventListener('click', resetFilters);
             

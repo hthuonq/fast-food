@@ -152,19 +152,88 @@
             font-weight: 700;
             margin: 0;
         }
+        
         .user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    display: flex
-;
-    align-items: center;
-    justify-content: center;
-    color: var(--dark-color);
-    font-weight: bold;
-    margin-right: 10px;
-}
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .password-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .password-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .password-toggle {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .order-stats-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .order-stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .stats-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .stats-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stats-divider {
+            height: 1px;
+            background-color: #dee2e6;
+            margin: 15px 0;
+        }
         
         @media (max-width: 768px) {
             .admin-container {
@@ -321,13 +390,65 @@
                                     <option value="inactive">Không hoạt động</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="role" class="form-label">Vai trò</label>
-                                <select class="form-select" id="role">
-                                    <option value="user" selected>Người dùng</option>
-                                    <option value="admin">Quản trị viên</option>
-                                    <option value="moderator">Điều hành viên</option>
-                                </select>
+                        </div>
+                        
+                        <!-- Order Statistics Section -->
+                        <div class="order-stats-section">
+                            <div class="order-stats-header">
+                                <h5 class="mb-0">Thống kê đơn hàng</h5>
+                               
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="stats-card">
+                                        <div class="stats-number">15</div>
+                                        <div class="stats-label">Tổng đơn hàng</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="stats-card">
+                                        <div class="stats-label">Tổng chi tiêu (VNĐ)</div>
+                                        <div class="stats-amount">5,230,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="stats-divider"></div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-save">
+                                    <i class="fas fa-save"></i> Lưu thay đổi
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Password Section -->
+                        <div class="password-section">
+                            <div class="password-section-header">
+                                <h5 class="mb-0">Mật khẩu</h5>
+                                <button type="button" class="password-toggle" id="password-toggle">
+                                    <i class="fas fa-edit"></i> Sửa mật khẩu
+                                </button>
+                            </div>
+                            
+                            <div class="row" id="password-fields" style="display: none;">
+                                <div class="col-md-6 mb-3">
+                                    <label for="current-password" class="form-label">Mật khẩu hiện tại</label>
+                                    <input type="password" class="form-control" id="current-password">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="new-password" class="form-label">Mật khẩu mới</label>
+                                    <input type="password" class="form-control" id="new-password">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="confirm-password" class="form-label">Xác nhận mật khẩu mới</label>
+                                    <input type="password" class="form-control" id="confirm-password">
+                                </div>
+                            </div>
+                            
+                            <div id="password-info">
+                                <p class="mb-0">Mật khẩu đã được thiết lập. Nhấn "Sửa mật khẩu" để thay đổi.</p>
                             </div>
                         </div>
                         
@@ -337,7 +458,7 @@
                         </div>
                         
                         <div class="text-end mt-4">
-                            <a href="users.html" class="btn btn-save">Lưu thay đổi</a>
+                            <button type="submit" class="btn btn-save">Lưu thay đổi</button>
                             <a href="users.html" class="btn btn-cancel">Hủy bỏ</a>
                         </div>
                     </form>
@@ -367,6 +488,27 @@
             }
         });
 
+        // Xử lý hiển thị/ẩn phần sửa mật khẩu
+        document.getElementById('password-toggle').addEventListener('click', function() {
+            const passwordFields = document.getElementById('password-fields');
+            const passwordInfo = document.getElementById('password-info');
+            
+            if (passwordFields.style.display === 'none') {
+                passwordFields.style.display = 'block';
+                passwordInfo.style.display = 'none';
+                this.innerHTML = '<i class="fas fa-times"></i> Hủy bỏ';
+            } else {
+                passwordFields.style.display = 'none';
+                passwordInfo.style.display = 'block';
+                this.innerHTML = '<i class="fas fa-edit"></i> Sửa mật khẩu';
+                
+                // Reset các trường mật khẩu
+                document.getElementById('current-password').value = '';
+                document.getElementById('new-password').value = '';
+                document.getElementById('confirm-password').value = '';
+            }
+        });
+
         // Xử lý form submit
         document.getElementById('editUserForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -376,6 +518,29 @@
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const status = document.getElementById('status').value;
+            
+            // Kiểm tra mật khẩu nếu đang sửa
+            const passwordFields = document.getElementById('password-fields');
+            if (passwordFields.style.display === 'block') {
+                const currentPassword = document.getElementById('current-password').value;
+                const newPassword = document.getElementById('new-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (!currentPassword) {
+                    alert('Vui lòng nhập mật khẩu hiện tại!');
+                    return;
+                }
+                
+                if (newPassword !== confirmPassword) {
+                    alert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
+                    return;
+                }
+                
+                if (newPassword.length < 0) {
+                    alert('Vui lòng nhập mật khẩu mới!');
+                    return;
+                }
+            }
             
             // Hiển thị thông báo thành công
             alert('Thông tin người dùng đã được cập nhật thành công!');
